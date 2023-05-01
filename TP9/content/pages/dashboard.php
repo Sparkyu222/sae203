@@ -1,7 +1,7 @@
-<div class="p-[10px] flex gap-[10px] bg-zinc-200 rounded-[20px]">
-    <div class="w-full p-[30px] flex flex-col gap-[30px] bg-white rounded-[10px]">
+<div class="flex-[1] p-[10px] flex gap-[10px] bg-zinc-200 rounded-[20px]">
+    <div class="w-[550px] p-[30px] flex flex-col gap-[30px] bg-white rounded-[10px]">
         <div class="flex justify-between items-center">
-            <span class="text-xl font-bold text-black">Client récents</span>
+            <span class="text-xl font-bold text-black">Client récent</span>
             <span class="text-slate-500">Voir plus</span>
         </div>
         <ul class="flex flex-col gap-[20px]">
@@ -58,9 +58,9 @@
             </li>
         </ul>
     </div>
-    <div class="w-full p-[30px] flex flex-col gap-[30px] bg-white rounded-[10px]">
+    <div class="flex-[1] p-[30px] flex flex-col gap-[30px] bg-white rounded-[10px]">
         <div class="flex justify-between items-center">
-            <span class="text-xl font-bold text-black">Article récents</span>
+            <span class="text-xl font-bold text-black">Commande récent</span>
             <span class="text-slate-500">Voir plus</span>
         </div>
         <ul class="flex flex-col gap-[20px]">
@@ -170,10 +170,10 @@
     </div>
 </div>
 
-<div class="p-[10px] bg-zinc-200 rounded-[20px]">
+<div class="w-[500px] p-[10px] bg-zinc-200 rounded-[20px]">
     <div class="w-full p-[30px] flex flex-col gap-[30px] bg-white rounded-[10px]">
         <div class="flex justify-between items-center">
-            <span class="text-xl font-bold text-black">Article récents</span>
+            <span class="text-xl font-bold text-black">Article récent</span>
             <span class="text-slate-500">Voir plus</span>
         </div>
         <ul class="flex flex-col gap-[20px]">
