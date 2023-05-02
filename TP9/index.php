@@ -24,6 +24,7 @@
 
             include("content/include/flogin.php");
 
+            // Hashage du mot de passe
             $saltcrypt = [
                 'salt' => 'Thisisarandomsaltstring',
             ];
@@ -52,7 +53,7 @@
         <!DOCTYPE html>
         <html lang="fr">
             <head>
-                <!-- Parametre -->
+                <!-- Paramètres -->
                 <meta charset="UTF-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,9 +81,6 @@
             <body>
 
     HTML;
-
-
-    //$_SESSION['user-token'] = true;
 
     // Si l'utilisateur n'est pas authentifié
     if (!isset($_SESSION['user-token'])) {

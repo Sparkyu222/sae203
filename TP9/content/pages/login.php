@@ -32,7 +32,7 @@
         
         echo <<<HTML
 
-            <!-- Si les identifiants sont incorrect ou l'un des deux input est vide -->
+            <!-- Si les identifiants sont incorrects ou l'un des deux input est vide -->
             <div class="flex items-center gap-2 font-semibold text-red-500 pt-5">
                 <svg width="21px" class="" height="21px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <title/>

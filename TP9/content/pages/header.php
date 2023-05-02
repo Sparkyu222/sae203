@@ -11,8 +11,7 @@
             </button>
             <button class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400"><i class="fa-solid fa-address-book"></i></button>
             <button class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400"><i class="fa-solid fa-box-open"></i></button>
-            <button class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400"><i class="fa-solid fa-dolly"></i></button>
-        </nav>
+         </nav>
 
         <nav class="h-full flex items-center gap-5">
             <img src="https://images.pexels.com/photos/2599869/pexels-photo-2599869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="h-full aspect-square bg-slate-400 border-2 border-slate-400 rounded-full">
