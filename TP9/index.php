@@ -39,7 +39,7 @@
                 $_SESSION['user-name'] = $return[0]['username'];
                 $_SESSION['user-mail'] = $return[0]['mail'];
 
-                header('Location: /TP9/');
+                header('Location: /sae203/TP9/');
                 
             }
 
