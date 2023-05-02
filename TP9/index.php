@@ -4,7 +4,7 @@
 
     if (isset($_GET['disconnect'])) {
         session_destroy();
-        header('Location: /TP9/');
+        header('Location: /sae203/TP9/');
     }
 
     include("content/include/connectDB.php");
