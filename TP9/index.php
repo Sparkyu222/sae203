@@ -126,7 +126,7 @@
         echo <<<HTML
         
                         <main class="w-full h-screen flex flex-col items-center bg-black">
-                            <header class="w-full h-[90px] px-[35px] py-[20px] flex justify-between">
+                            <header class="w-full h-[75px] px-[35px] py-[20px] flex justify-between">
 
         HTML;
 
@@ -138,7 +138,17 @@
                             <div class="w-full flex-1 p-[20px] flex gap-[20px] bg-white rounded-t-[35px]">
         HTML;
 
-        include("content/pages/dashboard.php");
+        if(isset($_GET['dashboard'])){
+            include("content/pages/dashboard.php");
+        } else if(isset($_GET['client'])){
+            include("content/pages/client.php");
+        } else if(isset($_GET['order'])){
+            include("content/pages/client.php");
+        } else if(isset($_GET['product'])){
+            include("content/pages/order.php");
+        } else {
+            include("content/pages/dashboard.php");
+        }
             
         // Pied de page
         echo <<<HTML

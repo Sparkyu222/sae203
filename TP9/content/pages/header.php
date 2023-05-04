@@ -5,12 +5,12 @@
         <img class="h-full" src="content/img/iut.png" alt="Logo de notre magasin">
 
         <nav class="h-full flex items-center gap-20">
-            <button class="px-4 py-2 flex items-center gap-4 bg-zinc-800 rounded-[20px] text-white">
+            <button class="px-4 py-2 flex items-center gap-4 bg-zinc-800 rounded-[20px] text-white" onclick="window.location.href = '?dashboard'">
                 <i class="fa-solid fa-house"></i>
                 <span>Dashboard</span>
             </button>
-            <button class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400"><i class="fa-solid fa-address-book"></i></button>
-            <button class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400"><i class="fa-solid fa-box-open"></i></button>
+            <button class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400" onclick="window.location.href = '?client'"><i class="fa-solid fa-address-book"></i></button>
+            <button class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400" onclick="window.location.href = '?order'"><i class="fa-solid fa-box-open"></i></button>
          </nav>
 
         <nav class="h-full flex items-center gap-5">
@@ -19,7 +19,7 @@
                 <span class="text-white">{$_SESSION['user-name']}</span>
                 <span class="text-slate-400">{$_SESSION['user-mail']}</span>
             </div>
-            <button class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-white" onclick="window.location.href = '?disconnect'"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+            <button class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-white duration-300 hover:bg-red-600" onclick="window.location.href = '?disconnect'"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
         </nav>
 
     HTML;
