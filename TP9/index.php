@@ -2,9 +2,13 @@
 
     session_start();
 
+    $parsed_url = parse_url($_SERVER['REQUEST_URI']);
+
+    $uri = $parsed_url['path'];
+
     if (isset($_GET['disconnect'])) {
         session_destroy();
-        header('Location: /sae203/TP9/');
+        header("Location: $uri");
     }
 
     include("content/include/connectDB.php");
@@ -39,7 +43,7 @@
                 $_SESSION['user-name'] = $return[0]['username'];
                 $_SESSION['user-mail'] = $return[0]['mail'];
 
-                header('Location: /sae203/TP9/');
+                header("Location: $uri");
                 
             }
 

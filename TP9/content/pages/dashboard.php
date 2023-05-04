@@ -1,4 +1,4 @@
-<div class="flex-[1] p-[10px] flex gap-[10px] bg-zinc-200 rounded-[20px] hidden">
+<div class="flex-[1] p-[10px] flex gap-[10px] bg-zinc-200 rounded-[20px]">
     <div class="w-[550px] p-[30px] flex flex-col gap-[30px] bg-white rounded-[10px]">
         <div class="flex justify-between items-center">
             <span class="text-xl font-bold text-black">Clients récents</span>
@@ -58,7 +58,7 @@
             </li>
         </ul>
     </div>
-    <div class="flex-[1] p-[30px] flex flex-col gap-[30px] bg-white rounded-[10px] hidden">
+    <div class="flex-[1] p-[30px] flex flex-col gap-[30px] bg-white rounded-[10px]">
         <div class="flex justify-between items-center">
             <span class="text-xl font-bold text-black">Commandes récentes</span>
             <span class="text-slate-500">Voir plus</span>
@@ -186,9 +186,9 @@
                 </div>
             </div>
             <div class="table-row-group">
-                <div class="table-row flex items-center">
+                <div class="table-row items-center">
                     <div class="table-cell"><img src="https://picsum.photos/200/300" alt="" class="aspect-square h-[70px] rounded-full"></div>
-                    <div class="table-cell flex flex-col">
+                    <div class="table-cell flex-col">
                         <span class="font-bold">Nom Prénom</span>
                         <span class="text-slate-500">43 avenue des koala, 76543</span>
                     </div>

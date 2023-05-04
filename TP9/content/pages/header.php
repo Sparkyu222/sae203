@@ -19,7 +19,7 @@
                 <span class="text-white">{$_SESSION['user-name']}</span>
                 <span class="text-slate-400">{$_SESSION['user-mail']}</span>
             </div>
-            <button class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-white" onclick="window.location.href = '/sae203/TP9/?disconnect'"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+            <button class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-white" onclick="window.location.href = '?disconnect'"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
         </nav>
 
     HTML;
@@ -155,7 +155,7 @@
 
 //             <div>
 
-//               <button type="button" class="flex rounded-md bg-gray-800 text-sm bg-red-700 hover:bg-red-800" id="user-menu-button">
+//               <button type="button" class="flex rounded-md bg-gray-800 text-sm hover:bg-red-800" id="user-menu-button">
 //                 <span class="sr-only">Open user menu</span>
 //                 <img class="h-7 w-7 rounded-md" src="content/img/logout.png" alt="Se déconnecter" title="Se déconnecter">
 //               </button>
