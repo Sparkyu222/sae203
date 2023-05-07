@@ -1,16 +1,39 @@
 <?php
 
+    if (!isset($_SESSION['user-token'])) {
+
+        header('HTTP/1.1 403 Forbidden');
+        echo "Vous n'avez pas accès à cette page.";
+        die();
+
+    }
+
     echo <<<HTML
 
         <img class="h-full" src="content/img/iut.png" alt="Logo de notre magasin">
 
         <nav class="h-full flex items-center gap-20">
-            <button class="px-4 py-2 flex items-center gap-4 bg-zinc-800 rounded-[20px] text-white" onclick="window.location.href = '?dashboard'">
+
+            <button id="app00" class="px-4 py-2 flex items-center gap-4 bg-zinc-800 rounded-[20px] text-white" onclick="appswitcher(0)">
                 <i class="fa-solid fa-house"></i>
                 <span>Dashboard</span>
             </button>
-            <button class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400" onclick="window.location.href = '?client'"><i class="fa-solid fa-address-book"></i></button>
-            <button class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400" onclick="window.location.href = '?order'"><i class="fa-solid fa-box-open"></i></button>
+
+            <button id="app01" class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400" onclick="appswitcher(1)">
+                <i class="fa-solid fa-address-book"></i>
+                <span></span>
+            </button>
+
+            <button id="app02" class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400" onclick="appswitcher(2)">
+                <i class="fa-solid fa-box-open"></i>
+                <span></span>
+            </button>
+
+            <button id="app03" class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400" onclick="appswitcher(3)">
+                <i class="fa-solid fa-box-open"></i>
+                <span></span>
+            </button>
+
          </nav>
 
         <nav class="h-full flex items-center gap-5">

@@ -1,10 +1,16 @@
 <?php
 
+    // API qui récupère les actions sur base de données
+    // Cette API permet de récupérer (fetch), ajouter (add) ou supprimer (delete) des objets contenu dans la base données
+
+    // Inclusion des scripts de logins
     include("../content/include/connectDB.php");
     include("../content/include/flogin.php");
 
+    // On définit le contenu de la page dans le header
     header('Content-Type: application/json');
 
+    // Array qui contient la réponse
     $return = [
 
         "status" => "",
@@ -13,6 +19,7 @@
 
     ];
 
+    // Connexion à la base de données
     $pdo = connectDB();
 
     // Si la connexion à la base de données échoue
@@ -22,7 +29,7 @@
         $return['message'] = "Unable to connect to the database";
 
         echo json_encode($return, JSON_PRETTY_PRINT);
-        exit();
+        die();
 
     }
 
@@ -51,6 +58,25 @@
 
     }
 
+    // Si le type d'action n'a pas été renseigné
+    if (!isset($_POST['action']) || $_POST['action'] = "") {
 
+        $return['status'] = "ERROR";
+        $return['message'] = "Action type on database missing";
+
+        echo json_encode($return, JSON_PRETTY_PRINT);
+        exit();
+
+    }
+
+    // Type d'actions : fetch, add, delete
+    /*
+    switch ($_POST['action']) {
+
+        case "add" :
+            
+
+    }
+    */
 
 ?>

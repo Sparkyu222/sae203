@@ -6,6 +6,7 @@
 
     $uri = $parsed_url['path'];
 
+    // Déconnexion
     if (isset($_GET['disconnect'])) {
         session_destroy();
         header("Location: $uri");
@@ -22,6 +23,7 @@
 
     }
 
+    /// Système de login
     if (isset($_POST['submit'])) {
 
         if ($_POST['login-mail'] != "" && $_POST['login-password'] != "") {
@@ -73,7 +75,6 @@
                 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
                 
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
-                <link rel="stylesheet" href="content/css/item-list.css">
                 <!-- <link rel="stylesheet" href="css/index.css">
                 <link rel="stylesheet" href="css/loader.css"> -->
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -81,12 +82,29 @@
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
                 <script src="https://cdn.tailwindcss.com"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+
+    HTML;
+
+    if (isset($_SESSION['user-token'])) {
+
+        echo <<<HTML
+
+                <!-- Scripts application -->
+                <script>const usertoken = "{$_SESSION['user-token']}";</script>
+                <script src="content/js/appswitcher.js"></script>
+
+        HTML;
+
+    }
+
+    echo <<<HTML
+
             </head>
             <body>
 
     HTML;
 
-    // Si l'utilisateur n'est pas authentifié
+    /// Si l'utilisateur n'est pas authentifié - Page de login
     if (!isset($_SESSION['user-token'])) {
         
         // Header
@@ -94,14 +112,7 @@
         
             <main class="w-full h-screen p-10 flex flex-col justify-center items-center gap-5 bg-gradient-to-tr from-gray-700 via-gray-900 to-black">
                 <header class="hidden">
-
-        HTML;
-
-        //include("content/pages/header.php");
-
-        echo <<<HTML
-
-                        </header>
+                </header>
                         <div class="p-5 bg-white rounded-[35px]">
         HTML;
 
@@ -111,10 +122,10 @@
         // Pied de page
         echo <<<HTML
 
-                            </div>
-                        </main>
-                    </body>
-                </html>
+                        </div>
+                    </main>
+                </body>
+            </html>
 
         HTML;
 
@@ -122,22 +133,25 @@
 
     }
     
-        // Header
-        echo <<<HTML
+    /// Si l'utilisateur est login
+    // Header
+    echo <<<HTML
         
-                        <main class="w-full h-screen flex flex-col items-center bg-black">
-                            <header class="w-full h-[75px] px-[35px] py-[20px] flex justify-between">
+                    <main class="w-full h-screen flex flex-col items-center bg-black">
+                        <header class="w-full h-[90px] px-[35px] py-[20px] flex justify-between">
 
-        HTML;
+    HTML;
 
-        include("content/pages/header.php");
+    include("content/pages/header.php");
 
-        echo <<<HTML
+    echo <<<HTML
 
-                            </header>
-                            <div class="w-full flex-1 p-[20px] flex gap-[20px] bg-white rounded-t-[35px]">
-        HTML;
+                        </header>
+                        <div id="main" class="w-full flex-1 p-[20px] flex gap-[20px] bg-white rounded-t-[35px]">
 
+    HTML;
+
+    /*
         if(isset($_GET['dashboard'])){
             include("content/pages/dashboard.php");
         } else if(isset($_GET['client'])){
@@ -149,15 +163,16 @@
         } else {
             include("content/pages/dashboard.php");
         }
-            
-        // Pied de page
-        echo <<<HTML
+    */
 
-                            </div>
-                        </main>
-                    </body>
-                </html>
+    // Pied de page
+    echo <<<HTML
 
-        HTML;
+                        </div>
+                    </main>
+                </body>
+            </html>
+
+    HTML;
 
 ?>
