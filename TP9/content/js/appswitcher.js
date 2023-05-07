@@ -10,14 +10,14 @@ function appswitcher(appid) {
 
     console.log(`Switched app: ${appid}, ${button[appid]}/${name[appid]}`);
 
-    document.getElementById(button[appid]).className = "px-4 py-2 flex items-center gap-4 bg-zinc-800 rounded-[20px] text-white";
+    document.getElementById(button[appid]).className = "px-4 py-2 flex items-center gap-4 bg-zinc-800 rounded-[20px] text-white hover:bg-zinc-700";
     document.getElementById(button[appid]).getElementsByTagName('span')[0].innerHTML = name[appid];
 
     for (let i=0 ; i < 4 ; i++) {
 
         if (appid == i) continue;
 
-        document.getElementById(button[i]).className = "aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400";
+        document.getElementById(button[i]).className = "aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400 hover:bg-gray-800";
         document.getElementById(button[i]).getElementsByTagName('span')[0].innerHTML = "";
 
     }
