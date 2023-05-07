@@ -35,9 +35,14 @@ create table if not exists commande (
     from_client int,
     date timestamp,
     adresse_livraison text,
+    primary key (id_commande),
+    foreign key (from_client) references client (id_client) on delete cascade on update cascade
+);
+
+create table if not exists contenu_commande (
+    num_commande int,
     num_produit int,
     quantite int,
-    primary key (id_commande),
-    foreign key (from_client) references client (id_client) on delete cascade on update cascade,
+    foreign key (num_commande) references commande (id_commande) on delete cascade on update cascade,
     foreign key (num_produit) references produit (id_produit) on delete cascade on update cascade
 );
