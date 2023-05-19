@@ -1,8 +1,11 @@
 <?php 
 
-    include('../include/connectDB.php');
-    include('../include/flogin.php');
-    include('../include/getfromdb.php');
+    // Protection d'accès des autres scripts
+    define('INCLUDED', true);
+    
+    require('../include/connectDB.php');
+    require('../include/flogin.php');
+    require('../include/getfromdb.php');
 
     function denied() {
 

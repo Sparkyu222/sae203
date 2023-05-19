@@ -91,7 +91,9 @@
 
                 <!-- Scripts application -->
                 <script>const usertoken = "{$_SESSION['user-token']}";</script>
+                <script src="content/js/onglet.js"></script>
                 <script src="content/js/appswitcher.js"></script>
+                
 
         HTML;
 
@@ -170,6 +172,8 @@
 
                         </div>
                     </main>
+
+                    
                 </body>
             </html>
 

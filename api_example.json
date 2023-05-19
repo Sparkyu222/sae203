@@ -1,0 +1,6 @@
+{
+    "token" : "TOKEN",
+    "action" : "FETCH/ADD/UPDATE/DELETE",
+    "object" : "CLIENT/PRODUCT/ORDER/ITEM",
+    "content" : {}
+}

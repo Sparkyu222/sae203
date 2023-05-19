@@ -1,5 +1,8 @@
 <?php
 
+    // Protection d'accès des autres scripts
+    define('INCLUDED', true);
+
     if (!isset($_SESSION['user-token'])) {
 
         header('HTTP/1.1 403 Forbidden');
@@ -14,22 +17,22 @@
 
         <nav class="h-full flex items-center gap-20">
 
-            <button id="app00" class="px-4 py-2 flex items-center gap-4 bg-zinc-800 rounded-[20px] text-white hover:bg-zinc-700" onclick="appswitcher(0)">
+            <button id="app00" class="h-[40px] px-4 flex items-center gap-4 bg-zinc-800 rounded-[20px] text-[16px] text-white hover:bg-zinc-700" onclick="appswitcher(0)">
                 <i class="fa-solid fa-house"></i>
                 <span>Dashboard</span>
             </button>
 
-            <button id="app01" class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400 hover:bg-gray-800" onclick="appswitcher(1)">
+            <button id="app01" class="aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-slate-400 hover:bg-zinc-800" onclick="appswitcher(1)">
                 <i class="fa-solid fa-address-book"></i>
                 <span></span>
             </button>
 
-            <button id="app02" class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400 hover:bg-gray-800" onclick="appswitcher(2)">
+            <button id="app02" class="aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-slate-400 hover:bg-zinc-800" onclick="appswitcher(2)">
                 <i class="fa-solid fa-box-open"></i>
                 <span></span>
             </button>
 
-            <button id="app03" class="aspect-square p-2 flex justify-center items-center rounded-[20px] text-slate-400 hover:bg-gray-800" onclick="appswitcher(3)">
+            <button id="app03" class="aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-slate-400 hover:bg-zinc-800" onclick="appswitcher(3)">
                 <i class="fa-solid fa-truck"></i>
                 <span></span>
             </button>

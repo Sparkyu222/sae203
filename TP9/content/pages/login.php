@@ -1,5 +1,8 @@
 <?php
 
+    // Protection d'accès des autres scripts
+    define('INCLUDED', true);
+
     echo <<<HTML
 
         <form method="POST">
@@ -16,11 +19,11 @@
 
                 <div class="mt-10">
                     <label for="login" class="ml-5 font-semibold">Adresse e-mail</label>
-                    <input type="mail" name="login-mail" id="" class="w-full mt-2 px-4 py-3 rounded-[20px] border border-slate-300" placeholder="exemple@rt-iut.re">
+                    <input type="mail" name="login-mail" id="" class="w-full mt-2 px-4 py-3 rounded-[20px] border border-slate-300" value="admin@rt-iut.re">
                 </div>
                 <div class="mt-5">
                     <label for="login" class="ml-5 font-semibold">Mot de passe</label>
-                    <input type="password" name="login-password" id="" class="w-full mt-2 px-4 py-3 rounded-[20px] border border-slate-300" placeholder="Guegan1234">
+                    <input type="password" name="login-password" id="" class="w-full mt-2 px-4 py-3 rounded-[20px] border border-slate-300" value="12345">
                 </div>
 
 

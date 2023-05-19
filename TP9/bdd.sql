@@ -16,9 +16,11 @@ create table if not exists client (
     id_client int AUTO_INCREMENT UNIQUE NOT NULL,
     nom varchar(50),
     prenom varchar(50),
-    adresse text,
+    adresse varchar(100),
+    complement_adresse varchar(50),
     code_postal varchar(10),
     ville varchar(100),
+    pays varchar(100),
     primary key (id_client)
 );
 
@@ -40,9 +42,11 @@ create table if not exists commande (
 );
 
 create table if not exists contenu_commande (
+    id_contenue int AUTO_INCREMENT UNIQUE NOT NULL,
     num_commande int,
     num_produit int,
     quantite int,
+    primary key(id_contenue),
     foreign key (num_commande) references commande (id_commande) on delete cascade on update cascade,
     foreign key (num_produit) references produit (id_produit) on delete cascade on update cascade
 );

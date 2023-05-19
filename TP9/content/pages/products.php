@@ -1,8 +1,11 @@
 <?php 
 
-    include('../include/connectDB.php');
-    include('../include/flogin.php');
-    include('../include/getfromdb.php');
+    // Protection d'accès des autres scripts
+    define('INCLUDED', true);
+
+    require('../include/connectDB.php');
+    require('../include/flogin.php');
+    require('../include/getfromdb.php');
 
     function denied() {
 
@@ -37,16 +40,13 @@
             
             </div>
             <div class="flex-1 overflow-auto">
-                <div class="table w-full">
-                    <div class="table-header-group sticky top-0 text-white">
-                        <div class="table-row mb-[20px]">
-                            <div class="table-cell pl-5 py-5 bg-black rounded-[20px_0_0_20px]">Liste</div>
-                            <div class="table-cell py-5 bg-black">Patronime / Adresse</div>
-                            <div class="table-cell py-5 bg-black">Ville</div>
-                            <div class="table-cell pr-5 py-5 bg-black rounded-[0_20px_20px_0]">Identifiant</div>
-                        </div>
-                    </div>
-                    <div class="table-row-group">
+            <div class="flex flex-col">
+                <div class="mb-[20px] px-[20px] py-[10px] flex flex-row gap-[30px] bg-black rounded-[20px] text-white">
+                    <div class="w-[10%] p-2 text-center">Liste</div>
+                    <div class="w-[40%] p-2">Patronime / Adresse</div>
+                    <div class="w-[30%] p-2">Ville</div>
+                    <div class="w-[20%] p-2 text-center">Identifiant</div>
+                </div>
     HTML;
 
     $list = getAllClients($pdo);
@@ -64,25 +64,47 @@
 
             $j = $i+1;
 
-            echo <<<HTML
+            if($i == 5){
+                echo <<<HTML
 
-                        <div class="table-row">
-                            <div class="table-cell pl-5 py-2">
+                        <div class="mb-[5px] px-[20px] py-[5px] flex flex-row gap-[30px] bg-gray-300 rounded-[20px] duration-300 last:mb-[0px] cursor-pointer">
+                            <div class="w-[10%] p-2 text-center">
                                 <p class="font-bold">#{$j}</p>
                             </div>
-                            <div class="table-cell py-5">
+                            <div class="w-[40%] p-2">
                                 <p class="font-bold">{$list[$i]['nom']} {$list[$i]['prenom']}</p>
                                 <p class="text-slate-500">{$list[$i]['adresse']}, {$list[$i]['code_postal']}</p>
                             </div>
-                            <div class="table-cell py-5">
+                            <div class="w-[30%] p-2">
                                 <span class="text-slate-500">{$list[$i]['ville']}, Département</span>
                             </div>
-                            <div class="table-cell pr-5 py-2">
+                            <div class="w-[20%] p-2 text-center">
                                 <span class="text-slate-500">Code : #{$list[$i]['id_client']}</span>
                             </div>
                         </div>
 
-            HTML;
+                HTML;
+            } else {
+                echo <<<HTML
+
+                        <div class="mb-[5px] px-[20px] py-[5px] flex flex-row gap-[30px] hover:bg-gray-200 rounded-[20px] duration-300 last:mb-[0px] cursor-pointer">
+                            <div class="w-[10%] p-2 text-center">
+                                <p class="font-bold">#{$j}</p>
+                            </div>
+                            <div class="w-[40%] p-2">
+                                <p class="font-bold">{$list[$i]['nom']} {$list[$i]['prenom']}</p>
+                                <p class="text-slate-500">{$list[$i]['adresse']}, {$list[$i]['code_postal']}</p>
+                            </div>
+                            <div class="w-[30%] p-2">
+                                <span class="text-slate-500">{$list[$i]['ville']}, Département</span>
+                            </div>
+                            <div class="w-[20%] p-2 text-center">
+                                <span class="text-slate-500">Code : #{$list[$i]['id_client']}</span>
+                            </div>
+                        </div>
+
+                HTML;
+            }
 
         }
     } else {
@@ -98,7 +120,6 @@
     
 
     echo <<<HTML
-                    </div>
                 </div>
             </div>
         </div>
