@@ -205,12 +205,13 @@
     function UpdateOrderFromDB ($link, $id_commande, $client, $address) {
 
         try {
+
         // Préparation de la requête
-        $query = $link->prepare("UPDATE commande SET from_client = :from_client, adresse_livraison = :adresse_livraison WHERE id_commande = :id_commande)");
+        $query = $link->prepare("UPDATE commande SET from_client = :from_client, adresse_livraison = :adresse_livraison WHERE id_commande = :id_commande");
 
         // Assignation des paramètres
         $query->bindParam(':from_client', $client);
-        $query->bindParam(':adresse_livraison ', $address);
+        $query->bindParam(':adresse_livraison', $address);
         $query->bindParam(':id_commande', $id_commande);
 
         $query->execute();

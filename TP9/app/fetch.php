@@ -38,31 +38,25 @@
         case "ORDER" :
 
             // Si le paramètre "specific" n'a pas été spécifié par le client
-            if (    !array_key_exists("specific", $request['content'])    || 
-                    $request['content']['specific'] == ""                 || 
-                    $request['content']['specific'] == null)              
-                {
+            if (!array_key_exists("specific", $request['content']) || empty($request['content']['specific'])) {
+
+                echo "\n".$request['content']['specific']."\n";
 
                     $return['status'] = "ERROR";
-                    $return['message'] = "Specific paramater is missing.";
+                    $return['message'] = "One or more paramater is missing.";
 
                     echo json_encode($return, JSON_PRETTY_PRINT);
                     die();
 
-                }
-            
+            }
+
             // On regarde si le client veux les commandes d'un client ou toutes les commandes
             switch ($request['content']['specific']) {
 
                 // Si il veux fetch les commandes d'un client
-                case true :
                 case "true" :
-                case 1 :
                     // Si le client n'a pas donné d'ID de client
-                    if (    !array_key_exists("client", $request['content'])    || 
-                            $request['content']['client'] == ""                 || 
-                            $request['content']['client'] == null)              
-                        {
+                    if (!array_key_exists("client_id", $request['content']) || empty($request['content']['client_id'])) {
 
                         $return['status'] = "ERROR";
                         $return['message'] = "No client were specified.";
@@ -72,7 +66,7 @@
 
                     }
                     
-                    $result = getOrdersFromClient($pdo, $request['content']['client']);
+                    $result = getOrdersFromClient($pdo, $request['content']['client_id']);
 
                     // Si la requête échoue
                     if (!is_array($result)) {
@@ -94,9 +88,7 @@
 
 
                 // Sinon, il veux fetch toutes les commandes
-                case false :
                 case "false" :
-                case 0 :
                 default :
                     $return['status'] = "SUCCESS";
                     $return['message'] = "";
@@ -111,9 +103,9 @@
         // Si le client veux fetch le contenue d'une commande
         case "ITEM" :
             // Si le client n'a pas donné d'ID de client
-            if (    !array_key_exists("order", $request['content'])    || 
-                    $request['content']['order'] == ""                 || 
-                    $request['content']['order'] == null)              
+            if (    !array_key_exists("order_id", $request['content'])    || 
+                    $request['content']['order_id'] == ""                 || 
+                    $request['content']['order_id'] == null)              
                 {
 
                     $return['status'] = "ERROR";
@@ -124,7 +116,7 @@
 
                 }
 
-                $result = getItemFromOrder($pdo, $request['content']['order']);
+                $result = getItemFromOrder($pdo, $request['content']['order_id']);
 
                 // Si la requête échoue
                 if (!is_array($result)) {

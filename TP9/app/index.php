@@ -133,9 +133,11 @@
             break;
 
         case "UPDATE" :
+            require('update.php');
             break;
 
         case "DELETE" :
+            require('delete.php');
             break;
 
         default :

@@ -144,16 +144,17 @@
                     </div>
                 </div>
             </div>
-            <div class="flex-1 relative overflow-hidden">
-                <button class="p-[15px] flex justify-between items-center absolute bottom-[20px] right-[20px] bg-sky-500 text-white rounded-full hover:bg-sky-800 duration-[300ms] onglet-btn" data-onglet="1"><i class="fa-solid fa-plus"></i></button>
-                <div class="flex flex-col">
-                    <div class="mb-[20px] px-[20px] py-[10px] flex flex-row gap-[30px] bg-black rounded-[20px] text-white">
-                        <div class="w-[10%] p-2 text-center">Liste</div>
-                        <div class="w-[40%] p-2">Patronime / Adresse</div>
-                        <div class="w-[30%] p-2">Ville</div>
-                        <div class="w-[20%] p-2 text-center">Identifiant</div>
-                    </div>
-                    <div class="flex flex-col overflow-auto">
+            <div class="flex-1 flex overflow-hidden">
+                <div class="flex-1 p-[20px] relative border rounded-[20px]">
+                    <button class="p-[15px] py-[10px] fixed justify-between items-center bottom-[20px] right-[20px] bg-sky-500 text-white rounded-full hover:bg-sky-800 duration-[300ms] onglet-btn" data-onglet="1" ><i class="fa-solid fa-plus"></i></button>
+                    <div class="flex flex-col">
+                        <div class="mb-[20px] px-[20px] py-[10px] flex flex-row gap-[30px] bg-black rounded-[20px] text-white">
+                            <div class="w-[10%] p-2 text-center">Liste</div>
+                            <div class="w-[40%] p-2">Patronime / Adresse</div>
+                            <div class="w-[30%] p-2">Ville</div>
+                            <div class="w-[20%] p-2 text-center">Identifiant</div>
+                        </div>
+                        <div class="flex flex-col overflow-auto">
 
     HTML;
 

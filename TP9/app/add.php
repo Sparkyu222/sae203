@@ -134,7 +134,6 @@
 
         // Si le client veux ajouter du contenu à une commande
         case "ITEM" :
-
             // Si l'array "item" n'a pas été renseigné dans "content"
             if (!array_key_exists("item", $request['content']) || empty($request['content']['item'])) {
 
@@ -166,8 +165,6 @@
             }
 
             foreach($request['content']['item'] as $item) {
-
-                $result = null;
 
                 $result = AddItemToOrder($pdo, $item['order_id'], $item['product_id'], $item['quantity']);
 

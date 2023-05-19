@@ -19,7 +19,7 @@
     if ($pdo == NULL) {
 
         echo "Connexion impossible à la base de données.";
-        exit();
+        die();
 
     }
 

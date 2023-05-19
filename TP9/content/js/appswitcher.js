@@ -1,22 +1,25 @@
-function clientappswticher() {
+// Function to switch between client app tabs
+function clientappswitcher() {
 
+    // Select all tab buttons and tab layers
     const ongletBtn = document.querySelectorAll('.onglet-btn'),
     ongletLayout = document.querySelectorAll('.onglet-layer');
 
     let index = 0;
 
-
-
     // Onglet switch system
+    // Add click event listener to each tab button
     ongletBtn.forEach((onglet) => {
         onglet.addEventListener('click', () => {
             ongletSelector(onglet.getAttribute('data-onglet'));
         })
     })
 
+    // Function to switch between tabs
     function ongletSelector(index) {
         console.log('on tente de changer donglet');
         
+        // Loop through all tab buttons
         ongletBtn.forEach((onglet) => {
             console.log(index);
             
@@ -40,27 +43,33 @@ function clientappswticher() {
                 }
             }
 
-            console.log('on quitte dans la putin de fonction');
+            console.log('on quitte la gentille fonction');
         });
     }
 
 }
 
+// Function to switch between apps
 function appswitcher(appid) {
 
+    // If the selected app is already open, do nothing
     if (appid == currentapp) return console.log(`Same app page, no switch.`);
 
+    // Set the current app to the selected app
     currentapp = appid;
 
+    // Arrays for app buttons, names, and URLs
     const button = ['app00', 'app01', 'app02', 'app03'];
     const name = ['Dashboard', 'Clients', 'Produits', 'Commandes'];
     const url = ['content/pages/dashboard.php', 'content/pages/clients.php', 'content/pages/products.php', 'content/pages/orders.php'];
 
     console.log(`Switched app: ${appid}, ${button[appid]}/${name[appid]}`);
 
+    // Change the selected app button's style and text
     document.getElementById(button[appid]).className = "h-[40px] px-4 flex items-center gap-4 bg-zinc-800 rounded-[20px] text-[16px] text-white hover:bg-zinc-700";
     document.getElementById(button[appid]).getElementsByTagName('span')[0].innerHTML = name[appid];
 
+    // Loop through all other app buttons and reset their style and text
     for (let i=0 ; i < 4 ; i++) {
 
         if (appid == i) continue;
@@ -70,9 +79,11 @@ function appswitcher(appid) {
 
     }
 
+    // Create a new FormData object with the user token
     let postdata = new FormData();
     postdata.append('user-token', usertoken);
 
+    // Fetch the selected app's content using its URL and the user token
     fetch (url[appid], {method: 'POST', body: postdata})
         .then(response => {
 
@@ -87,8 +98,10 @@ function appswitcher(appid) {
         })
         .then(data => {
 
+            // Replace the main content with the selected app's content
             document.getElementById('main').innerHTML = data;
 
+            // Call the appropriate function for the selected app
             switch (appid) {
 
                 // DASHBOARD
@@ -98,7 +111,7 @@ function appswitcher(appid) {
 
                 // CLIENTS
                 case 1:
-                    clientappswticher();
+                    clientappswitcher();
                     break;
 
                 // PRODUITS
@@ -118,9 +131,10 @@ function appswitcher(appid) {
 
 }
 
+// Set the current app to 0
 var currentapp = 0;
 
-// Récupération de dashboard.php lorsque l'on charge la page pour la première fois
+// Fetch dashboard.php content when the page is loaded for the first time
 let initpostdata = new FormData();
 initpostdata.append('user-token', usertoken);
 
@@ -138,6 +152,7 @@ fetch ('content/pages/dashboard.php', {method: 'POST', body: initpostdata})
     })
     .then(data => {
 
+        // Replace the main content with the dashboard.php content
         document.getElementById('main').innerHTML = data;
 
     })
