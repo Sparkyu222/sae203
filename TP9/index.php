@@ -92,6 +92,8 @@
                 <!-- Scripts application -->
                 <script>const usertoken = "{$_SESSION['user-token']}";</script>
                 <script src="content/js/varpool.js"></script>
+                <script src="content/js/pages/client.js"></script>
+                <script src="content/js/pages/order.js"></script>
                 <script src="content/js/onglet.js"></script>
                 <script src="content/js/appswitcher.js"></script>
                 

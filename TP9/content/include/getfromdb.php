@@ -37,7 +37,7 @@
             return NULL;
         }
 
-        $array = $output->fetchAll(PDO::FETCH_NUM);
+        $array = $output->fetchAll(PDO::FETCH_ASSOC);
 
         return $array;
 
@@ -60,7 +60,7 @@
         }
 
         // Récupération de chaque valeur dans un tableau à deux dimensions
-        $array = $output->fetchAll(PDO::FETCH_NUM);
+        $array = $output->fetchAll(PDO::FETCH_ASSOC);
 
         return $array;
 

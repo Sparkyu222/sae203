@@ -16,6 +16,7 @@
     $order_required = ["client", "address"];
     $item_required = ["order_id", "product_id", "quantity"];
 
+    // Identification de l'objet de la requête
     switch ($request['object']) {
 
         // Si le client veux ajouter un client

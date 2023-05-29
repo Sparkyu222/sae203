@@ -1,54 +1,3 @@
-// Function to switch between client app tabs
-function ClientPageFunctions() {
-
-    // Select all tab buttons and tab layers
-    const ongletBtn = document.querySelectorAll('.onglet-btn'),
-    ongletLayout = document.querySelectorAll('.onglet-layer');
-
-    let index = 0;
-
-    // Onglet switch system
-    // Add click event listener to each tab button
-    ongletBtn.forEach((onglet) => {
-        onglet.addEventListener('click', () => {
-            ongletSelector(onglet.getAttribute('data-onglet'));
-        })
-    })
-
-    // Function to switch between tabs
-    function ongletSelector(index) {
-        console.log('on tente de changer donglet');
-        
-        // Loop through all tab buttons
-        ongletBtn.forEach((onglet) => {
-            console.log(index);
-            
-            // if(onglet.classList.contains('a-onglet')){
-            //     return;
-            // } else {
-            //     onglet.classList.add('a-onglet');
-            // }
-
-            // for(i = 0; i < ongletBtn.length; i++) {
-            //     if(ongletBtn[i].getAttribute('data-onglet') !== index){
-            //         ongletBtn[i].classList.remove('a-onglet');
-            //     }
-            // }
-
-            for(j = 0; j < ongletLayout.length; j++) {
-                if (ongletLayout[j].getAttribute('data-onglet') == index) {
-                    ongletLayout[j].classList.remove('hidden');
-                } else {
-                    ongletLayout[j].classList.add('hidden');
-                }
-            }
-
-            console.log('on quitte la gentille fonction');
-        });
-    }
-
-}
-
 // Fonction pour switch entre les différentes pages
 function appswitcher(appid) {
 
@@ -79,6 +28,7 @@ function appswitcher(appid) {
 
     }
 
+    // Si le cache n'est pas vide pour la page demandée
     if (cache[appid] !== null) {
 
         document.getElementById('main').innerHTML = cache[appid];
@@ -93,16 +43,21 @@ function appswitcher(appid) {
 
             // CLIENTS
             case 1:
-                ClientPageFunctions();
+                document.querySelector('#objList').innerHTML = listcache[appid];
+                commandPageFunctions();
+
                 break;
 
             // PRODUITS
             case 2:
+                commandPageFunctions();
 
                 break;
             
             // COMMANDES
             case 3:
+                document.querySelector('#objList').innerHTML = listcache[appid];
+                commandPageFunctions();
 
                 break;
 
@@ -144,16 +99,19 @@ function appswitcher(appid) {
 
                 // CLIENTS
                 case 1:
-                    ClientPageFunctions();
+                    fetchAllClients(true);
+
                     break;
 
                 // PRODUITS
                 case 2:
+                    commandPageFunctions();
 
                     break;
                 
                 // COMMANDES
                 case 3:
+                    fetchAllOrders(true);
 
                     break;
 
@@ -170,6 +128,7 @@ function appswitcher(appid) {
 let initpostdata = new FormData();
 initpostdata.append('user-token', usertoken);
 
+// Fetch du dashboard quand on arrive sur la page
 fetch ('content/pages/dashboard.php', {method: 'POST', body: initpostdata})
     .then(response => {
 

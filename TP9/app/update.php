@@ -60,7 +60,9 @@
             echo json_encode($return, JSON_PRETTY_PRINT);
             exit();
 
+        // Si le client veut mettre à jour un produit
         case "PRODUCT" :
+            // Vérifier si l'array "content" comporte les clés nécessaires
             foreach ($product_required as $key) {
 
                 if (!array_key_exists($key, $request['content']) || empty($request['content'][$key])) {
@@ -75,8 +77,10 @@
 
             }
 
+            // Mise à jour du produit dans la base de données
             $result = UpdateProductFromDB($pdo, $request['content']['product_id'], $request['content']['product_code'], $request['content']['label'], $request['content']['price']);
 
+            // Si la requête n'a pas aboutie
             if (!is_bool($result)) {
 
                 $return['status'] = "ERROR";
@@ -88,6 +92,7 @@
                 
             }
 
+            // Notifier le client que la mise à jour s'est effectuée
             $return['status'] = "SUCCESS";
             $return['message'] = "Product updated.";
     
@@ -95,7 +100,9 @@
             exit();
 
 
+        // Si le client veut mettre à jour une commande
         case "ORDER" :
+            // Vérifier si l'array "content" comporte les clés nécessaires
             foreach ($order_required as $key) {
 
                 if (!array_key_exists($key, $request['content']) || empty($request['content'][$key])) {
@@ -110,8 +117,10 @@
 
             }
 
+            // Mise à jour de la commande dans la base de donnée
             $result = UpdateOrderFromDB($pdo, $request['content']['order_id'], $request['content']['client_id'], $request['content']['address']);
 
+            // Si la requête n'a pas aboutie
             if (!is_bool($result)) {
 
                 $return['status'] = "ERROR";
@@ -123,6 +132,7 @@
 
             }
 
+            // Notifier le client que la mise à jour s'est effectuée
             $return['status'] = "SUCCESS";
             $return['message'] = "Order updated.";
     
@@ -130,6 +140,7 @@
             exit();
 
 
+        // Si l'objet de la requête est inconnue
         default :
             $return['status'] = "ERROR";
             $return['message'] = "Wrong object type request";
