@@ -1,5 +1,5 @@
 // Function to switch between client app tabs
-function clientappswitcher() {
+function ClientPageFunctions() {
 
     // Select all tab buttons and tab layers
     const ongletBtn = document.querySelectorAll('.onglet-btn'),
@@ -49,41 +49,74 @@ function clientappswitcher() {
 
 }
 
-// Function to switch between apps
+// Fonction pour switch entre les différentes pages
 function appswitcher(appid) {
 
-    // If the selected app is already open, do nothing
+    // Si la page souhaitée est déjà sélectionnée et ouverte, arrêter la fonction
     if (appid == currentapp) return console.log(`Same app page, no switch.`);
 
-    // Set the current app to the selected app
+    // Valeur actuelle qui permet de définir l'application actuelle
     currentapp = appid;
 
-    // Arrays for app buttons, names, and URLs
+    // Tableaux pour les boutons, noms et url des pages
     const button = ['app00', 'app01', 'app02', 'app03'];
     const name = ['Dashboard', 'Clients', 'Produits', 'Commandes'];
     const url = ['content/pages/dashboard.php', 'content/pages/clients.php', 'content/pages/products.php', 'content/pages/orders.php'];
 
     console.log(`Switched app: ${appid}, ${button[appid]}/${name[appid]}`);
 
-    // Change the selected app button's style and text
-    document.getElementById(button[appid]).className = "h-[40px] px-4 flex items-center gap-4 bg-zinc-800 rounded-[20px] text-[16px] text-white hover:bg-zinc-700";
+    // Change le style du bouton selectionné sur "bouton seléctionné"
+    document.getElementById(button[appid]).className = "h-[40px] px-4 flex items-center gap-4 bg-neutral-800 rounded-[20px] text-[16px] text-white hover:bg-neutral-700";
     document.getElementById(button[appid]).getElementsByTagName('span')[0].innerHTML = name[appid];
 
-    // Loop through all other app buttons and reset their style and text
+    // Boucler sur les boutons des autres boutons pour défninir leur style sur "bouton désactivé"
     for (let i=0 ; i < 4 ; i++) {
 
         if (appid == i) continue;
 
-        document.getElementById(button[i]).className = "aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-slate-400 hover:bg-zinc-800";
+        document.getElementById(button[i]).className = "aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-neutral-400 hover:bg-neutral-800";
         document.getElementById(button[i]).getElementsByTagName('span')[0].innerHTML = "";
 
     }
 
-    // Create a new FormData object with the user token
+    if (cache[appid] !== null) {
+
+        document.getElementById('main').innerHTML = cache[appid];
+
+        // Appeler les fonctions appropriées lors de l'appel des pages
+        switch (appid) {
+
+            // DASHBOARD
+            case 0:
+
+                break;
+
+            // CLIENTS
+            case 1:
+                ClientPageFunctions();
+                break;
+
+            // PRODUITS
+            case 2:
+
+                break;
+            
+            // COMMANDES
+            case 3:
+
+                break;
+
+        }
+        
+        return console.log('Switched from cache');
+            
+    }
+
+    // Créer une réponse de formulaire pour la requête, il contiendra le token de l'utilisateur pour pouvoir obtenir la page distante
     let postdata = new FormData();
     postdata.append('user-token', usertoken);
 
-    // Fetch the selected app's content using its URL and the user token
+    // Fetch de la page distante en utilisant l'url de la page demandée
     fetch (url[appid], {method: 'POST', body: postdata})
         .then(response => {
 
@@ -98,10 +131,10 @@ function appswitcher(appid) {
         })
         .then(data => {
 
-            // Replace the main content with the selected app's content
+            // Remplacer le contenu de la div main par le contenu de la page désirée
             document.getElementById('main').innerHTML = data;
 
-            // Call the appropriate function for the selected app
+            // Appeler les fonctions appropriées lors de l'appel des pages
             switch (appid) {
 
                 // DASHBOARD
@@ -111,7 +144,7 @@ function appswitcher(appid) {
 
                 // CLIENTS
                 case 1:
-                    clientappswitcher();
+                    ClientPageFunctions();
                     break;
 
                 // PRODUITS
@@ -126,13 +159,12 @@ function appswitcher(appid) {
 
             }
 
+            cache[appid] = data;
+
         })
         .catch(error => console.error('Erreur: ', error));
 
 }
-
-// Set the current app to 0
-var currentapp = 0;
 
 // Fetch dashboard.php content when the page is loaded for the first time
 let initpostdata = new FormData();

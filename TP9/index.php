@@ -91,6 +91,7 @@
 
                 <!-- Scripts application -->
                 <script>const usertoken = "{$_SESSION['user-token']}";</script>
+                <script src="content/js/varpool.js"></script>
                 <script src="content/js/onglet.js"></script>
                 <script src="content/js/appswitcher.js"></script>
                 
@@ -112,7 +113,7 @@
         // Header
         echo <<<HTML
         
-            <main class="w-full h-screen p-10 flex flex-col justify-center items-center gap-5 bg-gradient-to-tr from-gray-700 via-gray-900 to-black">
+            <main class="w-full h-screen p-10 flex flex-col justify-center items-center gap-5 bg-gradient-to-tr from-gray-700 via-gray-900 to-black overflow-hidden">
                 <header class="hidden">
                 </header>
                         <div class="p-5 bg-white rounded-[35px]">
@@ -139,7 +140,7 @@
     // Header
     echo <<<HTML
         
-                    <main class="w-full h-screen flex flex-col items-center bg-black">
+                    <main class="w-full h-screen flex flex-col items-center bg-black overflow-hidden">
                         <header class="w-full h-[90px] px-[35px] py-[20px] flex justify-between">
 
     HTML;
@@ -149,7 +150,7 @@
     echo <<<HTML
 
                         </header>
-                        <div id="main" class="w-full flex-1 p-[20px] flex gap-[20px] bg-white rounded-t-[35px]">
+                        <div id="main" class="w-full flex-1 p-[20px] flex gap-[20px] bg-white rounded-t-[35px] overflow-hidden">
 
     HTML;
 

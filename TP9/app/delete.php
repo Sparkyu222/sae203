@@ -14,6 +14,7 @@
     switch ($request['object']) {
 
         case "CLIENT" :
+
             if (!array_key_exists("client_id", $request['content']) || empty($request['content']['client_id'])) {
 
                 $return['status'] = "ERROR";
@@ -37,7 +38,14 @@
 
             }
 
+            $return['status'] = "SUCCESS";
+            $return['message'] = "Client have been successfully deleted.";
+    
+            echo json_encode($return, JSON_PRETTY_PRINT);
+            exit();
+
         case "PRODUCT" :
+
             if (!array_key_exists("product_id", $request['content']) || empty($request['content']['product_id'])) {
 
                 $return['status'] = "ERROR";
@@ -48,7 +56,7 @@
 
             }
 
-            $result = DelClientFromDB($pdo, $request['content']['product_id']);
+            $result = DelProductFromDB($pdo, $request['content']['product_id']);
 
             if (!$result) {
 
@@ -60,6 +68,12 @@
                 die();
 
             }
+
+            $return['status'] = "SUCCESS";
+            $return['message'] = "Product have been successfully deleted.";
+    
+            echo json_encode($return, JSON_PRETTY_PRINT);
+            exit();
 
 
         case "ORDER" :
@@ -73,7 +87,7 @@
 
             }
 
-            $result = DelClientFromDB($pdo, $request['content']['order_id']);
+            $result = DelOrderFromDB($pdo, $request['content']['order_id']);
 
             if (!$result) {
 
@@ -85,6 +99,12 @@
                 die();
 
             }
+
+            $return['status'] = "SUCCESS";
+            $return['message'] = "Order have been successfully deleted.";
+    
+            echo json_encode($return, JSON_PRETTY_PRINT);
+            exit();
 
 
         case "ITEM" :

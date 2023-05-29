@@ -1,3 +1,4 @@
-var cache = [1, 2, 3 ,4];
+var cache = [null, null, null , null];
 
-//for (let i=0; i < )
+// Page par défaut
+var currentapp = 0;
