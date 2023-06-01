@@ -5,10 +5,9 @@ function ResetRequest() {
 
 }
 
-// Cache de pages
-var cache = [null, null, null , null];
-// Cache de liste d'objets
-var listcache = [null, null, null , null];
+// Cache de pages, cache de liste d'objets
+var cache = [null, null, null , null], listcache = [null, null, null , null];
+
 
 // Page par défaut, page actuellement sélectionnée
 var currentapp = 0;

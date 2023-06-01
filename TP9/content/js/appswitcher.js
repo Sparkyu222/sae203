@@ -15,7 +15,7 @@ function appswitcher(appid) {
     console.log(`Switched app: ${appid}, ${button[appid]}/${name[appid]}`);
 
     // Change le style du bouton selectionné sur "bouton seléctionné"
-    document.getElementById(button[appid]).className = "h-[40px] px-4 flex items-center gap-4 bg-neutral-800 rounded-[20px] text-[16px] text-white hover:bg-neutral-700";
+    document.getElementById(button[appid]).className = "h-[40px] px-4 flex items-center gap-4 bg-neutral-800 rounded-[20px] text-[16px] text-white hover:bg-neutral-700 duration-300";
     document.getElementById(button[appid]).getElementsByTagName('span')[0].innerHTML = name[appid];
 
     // Boucler sur les boutons des autres boutons pour défninir leur style sur "bouton désactivé"
@@ -23,7 +23,7 @@ function appswitcher(appid) {
 
         if (appid == i) continue;
 
-        document.getElementById(button[i]).className = "aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-neutral-400 hover:bg-neutral-800";
+        document.getElementById(button[i]).className = "aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-neutral-400 hover:bg-neutral-800 duration-300";
         document.getElementById(button[i]).getElementsByTagName('span')[0].innerHTML = "";
 
     }
@@ -45,6 +45,7 @@ function appswitcher(appid) {
             case 1:
                 document.querySelector('#objList').innerHTML = listcache[appid];
                 commandPageFunctions();
+                addClientEvent();
 
                 break;
 
@@ -100,7 +101,7 @@ function appswitcher(appid) {
                 // CLIENTS
                 case 1:
                     fetchAllClients(true);
-
+                    addClientEvent();
                     break;
 
                 // PRODUITS

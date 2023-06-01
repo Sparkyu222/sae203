@@ -75,7 +75,7 @@ function writeClientList() {
 
                 <div class="mb-[5px] px-[20px] py-[5px] flex flex-row gap-[30px] hover:bg-gray-200 rounded-[20px] duration-300 last:mb-[0px] cursor-pointer onglet-btn" data-onglet="${clientsjson[i].id_client}">
                     <div class="w-[10%] p-2 flex justify-center items-center">
-                        <input type="checkbox" name="" id="">
+                        <span class="font-bold">${(i+1)}</span>
                     </div>
                     <div class="w-[40%] p-2">
                         <p class="font-bold">${clientsjson[i].nom} ${clientsjson[i].prenom}</p>
@@ -109,4 +109,167 @@ function writeClientList() {
     // Mettre la liste visuelle des clients dans le cache
     listcache[currentapp] = list.innerHTML;
 
+}
+
+// Add client
+function addClientEvent() {
+
+    document.querySelector('#submit_addclient').addEventListener('click', () => {
+
+        ResetRequest();
+        
+        request.action = "ADD";
+        request.object = "CLIENT";
+        request.content = {
+            name: document.querySelector('#firstname').value,
+            firstname: document.querySelector('#lastname').value,
+            address: document.querySelector('#address').value,
+            postal: document.querySelector('#postal').value,
+            compl_address: document.querySelector('#compladdress').value,
+            city: document.querySelector('#city').value,
+            country: document.querySelector('#country').value
+        };
+
+        let formdata = new FormData();
+        formdata.append('request', JSON.stringify(request));
+
+        fetch('app/', {method: 'POST', body: formdata})
+            .then(response => {
+
+                if (!response.ok) {
+
+                    // Si la requête n'a pas aboutie
+                    throw new Error(`Erreur lors de la requête vers l'api : ${response.status}`);
+
+                }
+
+                return response.json();
+
+            })
+            .then(data => {
+
+                if (data.status !== "SUCCESS") {
+
+                    // Si l'API retourne une erreur
+                    throw new Error(`Erreur lors de la création du client : ${data.message}`);
+
+                }
+
+                // Quand on arrive ici, c'est que la requête est effectuée.
+                // Fermer le popup d'ajout de client
+                document.querySelector('.commandLayer3').classList.toggle('hidden');
+
+                fetchAllClients(true);
+                
+                console.log('Client créé.');
+
+            })
+            .catch(error => console.error(`Erreur du fetch de création`));
+
+    });
+}
+
+// Edit client
+function editClientEvent() {
+
+    document.querySelector('#submit_addclient').addEventListener('click', () => {
+
+        ResetRequest();
+        
+        request.action = "UPDATE";
+        request.object = "CLIENT";
+        request.content = {
+            //client_id: À MODIFIER
+            name: document.querySelector('#firstname').value,
+            firstname: document.querySelector('#lastname').value,
+            address: document.querySelector('#address').value,
+            postal: document.querySelector('#postal').value,
+            compl_address: document.querySelector('#compladdress').value,
+            city: document.querySelector('#city').value,
+            country: document.querySelector('#country').value
+        };
+
+        let formdata = new FormData();
+
+        formdata.append('request', JSON.stringify(request));
+
+        fetch('app/', {method: 'POST', body: formdata})
+            .then(response => {
+
+                if (!response.ok) {
+
+                    // Si la requête n'a pas aboutie
+                    throw new Error(`Erreur lors de la requête vers l'api : ${response.status}`);
+
+                }
+
+                return response.json();
+
+            })
+            .then(data => {
+
+                if (data.status !== "SUCCESS") {
+
+                    // Si l'API retourne une erreur
+                    throw new Error(`Erreur lors de l'édition des informations du client : ${data.message}`);
+
+                }
+
+                // Quand on arrive ici, c'est que la requête est effectuée.
+                // Fermer le popup d'edition du client
+
+
+            })
+            .catch(error => console.error(`Erreur du fetch d'update`))
+
+    });
+}
+
+// Remove client
+function deleteClientEvent() {
+
+    document.querySelector('#submit_addclient').addEventListener('click', () => {
+
+        ResetRequest();
+        
+        request.action = "DELETE";
+        request.object = "CLIENT";
+        request.content = {
+            //client_id: À MODIFIER [TABLEAU]
+        };
+
+        let formdata = new FormData();
+
+        formdata.append('request', JSON.stringify(request));
+
+        fetch('app/', {method: 'POST', body: formdata})
+            .then(response => {
+
+                if (!response.ok) {
+
+                    // Si la requête n'a pas aboutie
+                    throw new Error(`Erreur lors de la requête vers l'api : ${response.status}`);
+
+                }
+
+                return response.json();
+
+            })
+            .then(data => {
+
+                if (data.status !== "SUCCESS") {
+
+                    // Si l'API retourne une erreur
+                    throw new Error(`Erreur lors de l'effacement du client : ${data.message}`);
+
+                }
+
+                // Quand on arrive ici, c'est que la requête est effectuée.
+                // Fermer le popup d'edition du client
+
+
+            })
+            .catch(error => console.error(`Erreur du fetch de deletion`))
+
+    });
 }

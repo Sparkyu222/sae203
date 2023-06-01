@@ -13,24 +13,25 @@ echo <<<HTML
 
     <img class="h-full" src="content/img/iut.png" alt="Logo de notre magasin">
     <nav class="h-full flex items-center gap-20">
-        <button id="app00" class="h-[40px] px-4 flex items-center gap-4 bg-neutral-800 rounded-[20px] text-[16px] text-white hover:bg-neutral-700" onclick="appswitcher(0)">
+        <button id="app00" class="h-[40px] px-4 flex items-center gap-4 bg-neutral-800 rounded-[20px] text-[16px] text-white hover:bg-neutral-700 duration-300" onclick="appswitcher(0)">
             <i class="fa-solid fa-house"></i>
             <span>Dashboard</span>
         </button>
-        <button id="app01" class="aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-neutral-400 hover:bg-neutral-800" onclick="appswitcher(1)">
+        <button id="app01" class="aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-neutral-400 hover:bg-neutral-800 duration-300" onclick="appswitcher(1)">
             <i class="fa-solid fa-address-book"></i>
             <span></span>
         </button>
-        <button id="app02" class="aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-neutral-400 hover:bg-neutral-800" onclick="appswitcher(2)">
+        <button id="app02" class="aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-neutral-400 hover:bg-neutral-800 duration-300" onclick="appswitcher(2)">
             <i class="fa-solid fa-box-open"></i>
             <span></span>
         </button>
-        <button id="app03" class="aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-neutral-400 hover:bg-neutral-800" onclick="appswitcher(3)">
+        <button id="app03" class="aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-neutral-400 hover:bg-neutral-800 duration-300" onclick="appswitcher(3)">
             <i class="fa-solid fa-truck"></i>
             <span></span>
         </button>
     </nav>
     <nav class="h-full flex items-center gap-5">
+        <button class="aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-white duration-300 hover:bg-neutral-800"><i class="fa-solid fa-bell"></i></button>
         <img src="https://images.pexels.com/photos/2599869/pexels-photo-2599869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="h-full aspect-square bg-slate-400 border-2 border-slate-400 rounded-full">
         <div class="flex flex-col">
             <span class="text-white">{$_SESSION['user-name']}</span>
@@ -38,18 +39,6 @@ echo <<<HTML
         </div>
         <button class="aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-white duration-300 hover:bg-red-600" onclick="window.location.href = '?disconnect'"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
     </nav>
-
-
-    <div class="max-w-[500px] py-[20px] pl-[30px] pr-[10px] fixed bottom-[60px] left-[60px] flex justify-between items-center gap-[20px] bg-white rounded-[20px] shadow-xl z-40 hidden">
-        <div class="flex items-center gap-[30px]">
-            <i class="fa-solid fa-bell text-[2em] text-cyan-950"></i>
-            <div class="flex flex-col gap-[5px]">
-                <span class="font-bold text-[1.2em]">Notification</span>
-                <span class="text-slate-600">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore sequi exercitationem sunt illo, iste rem inventore doloribus eius beatae accusamus molestias, aliquam porro minima, voluptatum placeat temporibus quam repellat soluta.</span>
-            </div>
-        </div>
-        <button class="p-[20px] flex justify-center items-center rounded-full"><i class="fa-solid fa-xmark"></i></button>
-    </div>
 
 HTML;
 
