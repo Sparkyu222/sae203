@@ -6,6 +6,9 @@ function appswitcher(appid) {
 
     // Valeur actuelle qui permet de définir l'application actuelle
     currentapp = appid;
+    
+    // Réinitialisation de la variable qui contient l'objet actuel
+    currentobject = null;
 
     // Tableaux pour les boutons, noms et url des pages
     const button = ['app00', 'app01', 'app02', 'app03'];
@@ -46,20 +49,37 @@ function appswitcher(appid) {
                 document.querySelector('#objList').innerHTML = listcache[appid];
                 commandPageFunctions();
                 addClientEvent();
-
+                editClientEvent();
+                deleteClientEvent();
+                PingNotification();
+                ShowNotification();
+                
                 break;
 
             // PRODUITS
             case 2:
+                document.querySelector('#objList').innerHTML = listcache[appid];
                 commandPageFunctions();
+                addProductEvent();
+                editProductEvent();
+                deleteProductEvent();
+                PingNotification();
+                ShowNotification();
 
                 break;
             
             // COMMANDES
             case 3:
                 document.querySelector('#objList').innerHTML = listcache[appid];
+                //fetchAllClients(false, true);
+                writeProductSelectFromCache();
+                writeClientSelectFromCache();
                 commandPageFunctions();
-
+                addOrderEvent();
+                editOrderEvent();
+                deleteOrderEvent();
+                PingNotification();
+                ShowNotification();
                 break;
 
         }
@@ -100,19 +120,33 @@ function appswitcher(appid) {
 
                 // CLIENTS
                 case 1:
-                    fetchAllClients(true);
+                    fetchAllClients(true, false);
                     addClientEvent();
+                    editClientEvent();
+                    deleteClientEvent();
+                    ShowNotification();
                     break;
 
                 // PRODUITS
                 case 2:
-                    commandPageFunctions();
+                    fetchAllProducts(true, false);
+                    addProductEvent();
+                    editProductEvent();
+                    deleteProductEvent();
+                    //commandPageFunctions();
+                    ShowNotification();
 
                     break;
                 
                 // COMMANDES
                 case 3:
                     fetchAllOrders(true);
+                    //fetchAllClients(false);
+                    //fetchAllProducts(false);
+                    // addOrderEvent();
+                    // editOrderEvent();
+                    // deleteOrderEvent();
+                    ShowNotification();
 
                     break;
 
@@ -149,3 +183,19 @@ fetch ('content/pages/dashboard.php', {method: 'POST', body: initpostdata})
 
     })
     .catch(error => console.error('Erreur: ', error));
+
+
+// Afficher le menu de notifications
+function ShowNotification(){
+    document.getElementById('notifbutton').addEventListener('click', () => {
+        document.getElementById('notification').classList.toggle('hidden');
+    });
+}
+
+function PingNotification(){
+    if (data.content != 0) {
+        document.getElementById('notifping').classList.add('hidden');
+    } else {
+        document.getElementById('notifping').classList.remove('hidden');
+    }
+}

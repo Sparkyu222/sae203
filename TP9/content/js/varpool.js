@@ -15,5 +15,8 @@ var currentapp = 0;
 // Objet JSON de la requête
 var request = {token: usertoken, action: "", object: "", content: {}};
 
+// Variable qui contient l'id de l'objet actuellement sélectionné
+var currentobject = null;
+
 // Variales qui contient les données contenue de la base
 var clientsjson = {}, productjson = {}, orderjson = {};

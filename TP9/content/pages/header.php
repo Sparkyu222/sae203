@@ -31,7 +31,14 @@ echo <<<HTML
         </button>
     </nav>
     <nav class="h-full flex items-center gap-5">
-        <button class="aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-white duration-300 hover:bg-neutral-800"><i class="fa-solid fa-bell"></i></button>
+        <div class="relative">
+            <button id="notifbutton" class="aspect-square w-[40px] flex justify-center items-center rounded-[20px] text-[16px] text-white duration-300 hover:bg-neutral-800">
+                <i class="fa-solid fa-bell"></i>
+                <span id="notifping" class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-600 rounded-full animate-ping hidden"></span>
+                <span id="notifping" class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-600 rounded-full hidden"></span>
+            </button>
+        </div>
+        </button>
         <img src="https://images.pexels.com/photos/2599869/pexels-photo-2599869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="h-full aspect-square bg-slate-400 border-2 border-slate-400 rounded-full">
         <div class="flex flex-col">
             <span class="text-white">{$_SESSION['user-name']}</span>

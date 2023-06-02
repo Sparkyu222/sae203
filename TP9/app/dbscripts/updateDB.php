@@ -163,7 +163,7 @@
         $query->execute();
 
         } catch (PDOException $e) {
-            
+
             return $query->errorInfo()[2];
 
         }

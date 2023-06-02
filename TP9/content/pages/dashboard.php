@@ -26,5 +26,5 @@ if (isset($_POST['user-token'])) {
 }
 
 echo <<<HTML
-<div class="w-full flex justify-center items-center text-3xl">Dashboard is coming back..</div>
+<div class="w-full flex justify-center items-center text-3xl">Dashboard is already here!</div>
 HTML;

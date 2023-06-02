@@ -78,6 +78,7 @@
                 <!-- <link rel="stylesheet" href="css/index.css">
                 <link rel="stylesheet" href="css/loader.css"> -->
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                <link rel="stylesheet" href="content/css/index.css">
                 
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
                 <script src="https://cdn.tailwindcss.com"></script>
@@ -92,11 +93,11 @@
                 <!-- Scripts application -->
                 <script>const usertoken = "{$_SESSION['user-token']}";</script>
                 <script src="content/js/varpool.js"></script>
+                <script src="content/js/onglet.js"></script>
                 <script src="content/js/pages/client.js"></script>
                 <script src="content/js/pages/order.js"></script>
-                <script src="content/js/onglet.js"></script>
+                <script src="content/js/pages/product.js"></script>
                 <script src="content/js/appswitcher.js"></script>
-                
 
         HTML;
 
