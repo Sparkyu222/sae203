@@ -70,16 +70,20 @@ function appswitcher(appid) {
             
             // COMMANDES
             case 3:
-                document.querySelector('#objList').innerHTML = listcache[appid];
-                //fetchAllClients(false, true);
-                writeProductSelectFromCache();
-                writeClientSelectFromCache();
-                commandPageFunctions();
-                addOrderEvent();
-                editOrderEvent();
-                deleteOrderEvent();
+                document.querySelector('#objList').innerHTML = listcache[appid];        // Reprends la liste d'objet depuis le cache
+                writeProductSelectFromCache();                                          // Écrit la liste des produits depuis le cache
+                writeClientSelectFromCache();                                           // Écrit la liste des clients depuis le cache
+                commandPageFunctions();                                                 // Initie les addEventListener sur les boutons de la page
+                ResetCurrentItemList();                                                 // Réinitialiser les tableaux d'ajout ou de suppression de contenue de commande
+                addItemsToDBEvent();                                                    // Initie les addEventListener sur le bouton d'ajout de contenue de commande    
+                addItemToOrderListEvent();                                              // Initie les addEventListener pour la liste d'objet
+                addOrderEvent();                                                        // Initie les addEventListener pour l'ajout d'information de commande
+                editOrderInformationsEvent();                                           // Initie les addEventListener pour la modification d'information de commande
+                deleteOrderEvent();                                                     // Initie les addEventListener pour la suppresion d'une commande
                 PingNotification();
                 ShowNotification();
+                addItemToOrderList();
+
                 break;
 
         }
@@ -141,11 +145,12 @@ function appswitcher(appid) {
                 // COMMANDES
                 case 3:
                     fetchAllOrders(true);
-                    //fetchAllClients(false);
-                    //fetchAllProducts(false);
-                    // addOrderEvent();
-                    // editOrderEvent();
-                    // deleteOrderEvent();
+                    addItemToOrderListEvent();
+                    addItemsToDBEvent();                                                    // Initie les addEventListener sur le bouton d'ajout de contenue de commande
+                    addOrderEvent();                                                        // Initie les addEventListener pour l'ajout d'information de commande
+                    editOrderInformationsEvent();                                           // Initie les addEventListener pour la modification d'information de commande
+                    delItemsFromDBEvent();
+                    deleteOrderEvent();
                     ShowNotification();
 
                     break;

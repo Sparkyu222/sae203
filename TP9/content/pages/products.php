@@ -74,11 +74,11 @@
                         <span class="text-[20px] text-slate-500">Pas de produit sélectionné..</span>
                     </div>
                     <div class="flex-1 flex flex-col gap-[20px] overflow-auto onglet-layer hidden fade" data-onglet="2">
-                        <div class="p-[20px] flex gap-[20px] bg-white rounded-[20px]">
-                            <div class="w-[30%] flex">
+                        <div class="h-full p-[20px] flex flex-col gap-[20px] bg-white rounded-[20px]">
+                            <div class="w-full h-[50%] flex">
                                 <img class="flex-1 flex justify-center items-center rounded-[20px] object-cover overflow-hidden" src="https://images.pexels.com/photos/5872351/pexels-photo-5872351.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
                             </div>
-                            <div class="w-[70%] flex flex-col gap-[30px] p-[20px] border rounded-[20px]">
+                            <div class="h-full flex flex-col justify-between gap-[30px] p-[20px] border rounded-[20px]">
                                 <div class="flex flex-col gap-[10px]">
                                     <div class="grid grid-cols-2 gap-[20px]">
                                         <div class="flex flex-col gap-[10px]">
@@ -101,20 +101,6 @@
                                     <button id="formOngletDelete" type="reset" class="px-[20px] py-[10px] rounded-[20px]">Supprimer</button>
                                     <button id="formOngletSubmit"  class="px-[20px] py-[10px] flex justify-center items-center bg-cyan-950 text-white rounded-[20px] hover:bg-cyan-700 duration-[300ms]">Sauvegarder</button>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="flex-1 flex overflow-hidden">
-                            <div class="flex-1 p-[20px] flex flex-col border border-slate-400 rounded-[20px] overflow-hidden">
-                                <div class="flex flex-col">
-                                    <div class="mb-[20px] px-[20px] py-[10px] flex flex-row gap-[30px] bg-black rounded-[20px] text-white">
-                                        <div class="w-[10%] p-2 text-center">Liste</div>
-                                        <div class="w-[20%] p-2">Numéro client</div>
-                                        <div class="w-[30%] p-2">Adresse de livraison</div>
-                                        <div class="w-[20%] p-2 text-center">Identifiant</div>
-                                        <div class="w-[20%] p-2 text-center">Date</div>
-                                    </div>
-                                </div>
-                                <div id="listOnglet" class="flex-1 flex flex-col relative overflow-auto"></div>
                             </div>
                         </div>
                     </div>

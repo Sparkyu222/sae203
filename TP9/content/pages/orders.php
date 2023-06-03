@@ -44,15 +44,14 @@
                         <div class="grid grid-cols-3 gap-[20px]">
                             <div class="flex flex-col gap-[10px]">
                                 <label for="" class="ml-[15px]">Client</label>
-                                <select name="" id="add-client-selector" class="w-full px-[20px] py-[10px] block bg-gray-200 rounded-[20px] border-0">
-                                </select>
+                                <select name="" id="add-client-selector" class="w-full px-[20px] py-[10px] block bg-gray-200 rounded-[20px] border-0"></select>
                             </div>
                             <div class="flex flex-col gap-[10px] col-span-2">
                                 <label for="" class="ml-[15px]">Adresse</label>
-                                <input type="text" name="" id="add-adresse-selector" class="w-full px-[20px] py-[10px] block bg-gray-200 rounded-[20px] border-0">
+                                <input type="text" name="" id="add-adresse-selector" class="w-full px-[20px] py-[10px] block bg-gray-200 rounded-[20px] border-0" placeholder="Saisissez l'adresse ..">
                             </div>
                         </div>
-                        <div class="grid grid-cols-6 gap-[20px]">
+                        <div class="grid grid-cols-6 gap-[20px] hidden">
                             <div class="flex flex-col gap-[10px] col-span-3">
                                 <label for="" class="ml-[15px]">Produit</label>
                                 <select name="" id="add-product-selector" class="w-full px-[20px] py-[10px] block bg-gray-200 rounded-[20px] border-0">
@@ -61,16 +60,15 @@
                             </div>
                             <div class="flex flex-col gap-[10px] col-span-2">
                                 <label for="" class="ml-[15px]">Quantité</label>
-                                <input type="number" name="" id="add-quantite-selector" min="1" max="10" value="1" class="w-full px-[20px] py-[10px] block bg-gray-200 rounded-[20px] border-0">
+                                <input type="number" name="" id="add-quantity-selector" min="1" max="10" value="1" class="w-full px-[20px] py-[10px] block bg-gray-200 rounded-[20px] border-0">
                             </div>
                             <div class="flex flex-col justify-end gap-[10px]">
-                                <button class="px-[20px] py-[10px] flex justify-center items-center bg-cyan-950 text-white rounded-[20px] hover:bg-cyan-700 duration-[300ms]">Lister</button>
+                                <button type="button" id="listAddOrder" class="px-[20px] py-[10px] flex justify-center items-center bg-cyan-950 text-white rounded-[20px] hover:bg-cyan-700 duration-[300ms]">Lister</button>
                             </div>
                         </div>
-                        <div class="p-[20px] flex flex-col gap-[10px] border rounded-[20px]">
-                            <div class="flex justify-between items-center gap-[10px]">
-                                <p>Pas de produit ajouté</p>
-                                <button>Supprimer</button>
+                        <div id="tableListAddOrder" class="w-full h-[130px] p-[20px] flex flex-col gap-[10px] border rounded-[20px] overflow-auto hidden">
+                            <div class="flex-1 flex justify-center items-center gap-[10px]">
+                                <span>Pas de produit listé</span>
                             </div>
                         </div>
                     </div>
@@ -94,45 +92,45 @@
                             <div class="w-[30%] flex">
                                 <img class="flex-1 flex justify-center items-center rounded-[20px] object-cover overflow-hidden" src="https://images.pexels.com/photos/2599869/pexels-photo-2599869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
                             </div>
-                            <div class="w-[70%] flex flex-col gap-[30px] p-[20px] border rounded-[20px]">
-                                <div class="flex flex-col gap-[10px]">
+                            <div class="w-[70%] flex flex-col gap-[20px] p-[20px] border rounded-[20px]">
+                                <div class="flex flex-col gap-[20px]">
                                     <div class="grid grid-cols-3 gap-[20px]">
                                         <div class="flex flex-col gap-[10px]">
                                             <label for="" class="ml-[15px]">Client</label>
-                                            <select name="" id="client-selector" class="w-full px-[20px] py-[10px] block bg-gray-200 rounded-[20px] border-0">
-
-                                            </select>
+                                            <select name="" id="client-selector" class="w-full px-[20px] py-[10px] block bg-gray-200 rounded-[20px] border-0"></select>
                                         </div>
                                         <div class="flex flex-col gap-[10px] col-span-2">
                                             <label for="" class="ml-[15px]">Adresse</label>
                                             <input type="text" name="" id="adresse-selector" class="w-full px-[20px] py-[10px] block bg-gray-200 rounded-[20px] border-0">
                                         </div>
                                     </div>
+                                    <div class="flex justify-end gap-[20px]">
+                                        <button id="formOngletDelete" type="reset" class="px-[20px] py-[10px] rounded-[20px]">Supprimer</button>
+                                        <button id="formOngletSubmit"  class="px-[20px] py-[10px] flex justify-center items-center bg-cyan-950 text-white rounded-[20px] hover:bg-cyan-700 duration-[300ms]">Sauvegarder</button>
+                                    </div>
+                                </div>
+                                <div class="flex-1 pt-[20px] flex flex-col gap-[20px] border-t">
                                     <div class="grid grid-cols-6 gap-[20px]">
                                         <div class="flex flex-col gap-[10px] col-span-3">
                                             <label for="" class="ml-[15px]">Produit</label>
-                                            <select name="" id="product-selector" class="w-full px-[20px] py-[10px] block bg-gray-200 rounded-[20px] border-0">
-                                                
-                                            </select>
+                                            <select name="" id="edit-product-selector" class="w-full px-[20px] py-[10px] block bg-gray-200 rounded-[20px] border-0"></select>
                                         </div>
                                         <div class="flex flex-col gap-[10px] col-span-2">
                                             <label for="" class="ml-[15px]">Quantité</label>
-                                            <input type="number" name="" id="" min="1" max="10" value="1" class="w-full px-[20px] py-[10px] block bg-gray-200 rounded-[20px] border-0">
+                                            <input type="number" name="" id="edit-quantity-selector" min="1" max="10" value="1" class="w-full px-[20px] py-[10px] block bg-gray-200 rounded-[20px] border-0">
                                         </div>
                                         <div class="flex flex-col justify-end gap-[10px]">
-                                            <button class="px-[20px] py-[10px] flex justify-center items-center bg-cyan-950 text-white rounded-[20px] hover:bg-cyan-700 duration-[300ms]">Lister</button>
+                                            <button id="listEditOrder" class="px-[20px] py-[10px] flex justify-center items-center bg-cyan-950 text-white rounded-[20px] hover:bg-cyan-700 duration-[300ms]">Lister</button>
                                         </div>
                                     </div>
-                                    <div class="p-[20px] flex flex-col gap-[10px] border rounded-[20px]">
-                                        <div class="flex justify-between items-center gap-[10px]">
-                                            <p>Pas de produit ajouté</p>
-                                            <button>Supprimer</button>
+                                    <div id="tableListEditOrder" class="w-full h-[130px] p-[20px] flex flex-col gap-[10px] border rounded-[20px] overflow-auto">
+                                        <div class="flex-1 flex justify-center items-center gap-[10px]">
+                                            <span>Pas de produit listé</span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="flex justify-end gap-[20px]">
-                                    <button id="formOngletDelete" type="reset" class="px-[20px] py-[10px] rounded-[20px]">Supprimer</button>
-                                    <button id="formOngletSubmit"  class="px-[20px] py-[10px] flex justify-center items-center bg-cyan-950 text-white rounded-[20px] hover:bg-cyan-700 duration-[300ms]">Sauvegarder</button>
+                                    <div class="flex justify-end gap-[20px]">
+                                        <button id="formListEditOrder"  class="px-[20px] py-[10px] flex justify-center items-center bg-cyan-950 text-white rounded-[20px] hover:bg-cyan-700 duration-[300ms]">Ajouter</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

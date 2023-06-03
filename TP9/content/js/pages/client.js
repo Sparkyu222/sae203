@@ -56,26 +56,12 @@ function fetchAllClients(write, writeClientSelect) {
 
             console.log('Récupération des clients effectué');
 
-            // Fonctions d'onglet pour la page ESSENTIEL
+            // Fonctions d'onglet pour la page ESSENTIELodddd
             if (write) commandPageFunctions();
 
             if (writeClientSelect) {
 
-                const 
-                    clientselector = document.querySelector('#client-selector'),
-                    addclientselector = document.querySelector('#add-client-selector');
-        
-                clientselector.innerHTML = "";
-                
-                clientsjson.forEach(client => {
-            
-                    if(currentobject != null && ordersjson[currentobject].from_client == client.id_client) {
-                        clientselector.innerHTML += `<option value="${client.id_client}" selected>${client.nom} ${client.prenom}</option>`;
-                    } else {
-                        clientselector.innerHTML += `<option value="${client.id_client}">${client.nom} ${client.prenom}</option>`;
-                    }
-            
-                });
+                const addclientselector = document.querySelector('#add-client-selector');
             
                 addclientselector.innerHTML = "";
                 addclientselector.innerHTML += `<option value="" disable><-- Selectionnez un client --></option>`;
@@ -416,7 +402,7 @@ function writeClientOrders() {
 
             list.innerHTML += `
 
-                <div class="mb-[5px] px-[20px] py-[5px] flex flex-row gap-[30px] hover:bg-slate-200 rounded-[20px] duration-300 last:mb-[0px] cursor-pointer">
+                <div class="mb-[5px] px-[20px] py-[5px] flex flex-row gap-[30px] hover:bg-slate-200 rounded-[20px] duration-300 last:mb-[0px]">
                     <div class="w-[10%] p-2 flex justify-center items-center">
                         <p class="font-bold">${i+1}</p>
                     </div>

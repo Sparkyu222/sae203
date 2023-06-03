@@ -136,8 +136,9 @@ function addOrderEvent() {
         request.content = {
             client_id: document.querySelector('#add-client-selector').value,
             address: document.querySelector('#add-adresse-selector').value,
-            postal: document.querySelector('#add-product-selector').value
         };
+
+        console.log(document.querySelector('#add-client-selector').value);
 
         let formdata = new FormData();
         formdata.append('request', JSON.stringify(request));
@@ -168,9 +169,9 @@ function addOrderEvent() {
                 // Fermer le popup d'ajout de client
                 document.querySelector('.commandLayer2').classList.toggle('hidden');
 
-                fetchAllOrders(true, false);
+                fetchAllOrders(true);
                 
-                console.log('Client créé.');
+                console.log('Commande créée.');
 
             })
             .catch(error => console.error(`Erreur du fetch de création : ${error}`));
@@ -178,7 +179,428 @@ function addOrderEvent() {
     });
 }
 
-function editOrderEvent() {
+function addItemToOrderListEvent () {
+
+    // Edition du contenue d'une commande: Ajouter des produits
+    document.querySelector('#listEditOrder').addEventListener('click', () => {
+
+        // Sélecteur pour la liste
+        const list = document.querySelector('#tableListEditOrder');
+
+        // Variable qui contient le sélecteur et dernière variable qui dit si il faut push ou pas le produit dans l'objet
+        let
+            productid = document.querySelector('#edit-product-selector').value,
+            valuequantity = document.querySelector('#edit-quantity-selector').value;
+            nopush = false;
+
+        // Si on sélectionne "<-- Sélectionnez un produit -->", on n'ajoute rien à la liste
+        if (productid == -1 || valuequantity === "") return false;
+
+        for (let i=0; i < orderjson[currentobject].items.length ; i++) {
+
+            if (orderjson[currentobject].items[i].num_produit === productid) {
+            
+                return false;
+                break;
+
+            }
+            
+        }
+
+        // Boucle qui vérifie si l'id donné par le select est déjà présent dans la liste
+        for (let i=0; i < currentEditItemAddList.item.length; i++) {
+
+            // Si on a trouvé un cas similaire
+            if (productid === currentEditItemAddList.item[i].product_id) {
+                
+                // Si le cas est similaire et que la quantité est aussi identique, alors ne rien toucher dans la liste
+                if (currentEditItemAddList.item[i].quantity === valuequantity) return false;
+
+                // Si l'id est similaire mais que la quantité n'est pas identique, seulement modifier la quantité et ré-imprimmer la liste sans push un nouveau tableau
+                currentEditItemAddList.item[i].quantity = valuequantity;
+                nopush = true;
+                break;
+
+            };
+
+        }
+        
+        // Push un nouvel élément dans le tableau "item"
+        if (!nopush) currentEditItemAddList.item.push({order_id: orderjson[currentobject].id_commande, product_id: productid, quantity: valuequantity});
+
+        // Réinitialiser la liste
+        list.innerHTML = "";
+
+        // Imprimmer la liste
+        for(let i = 0; i < currentEditItemAddList.item.length; i++) {
+
+            let productname = "";
+            
+            // Rechercher le nom du produit
+            for (let j=0; j < productjson.length; j++) {
+
+                if (currentEditItemAddList.item[i].product_id === productjson[j].id_produit) {
+
+                    productname = productjson[j].libelle;
+                    break;
+
+                }
+
+            }
+
+            list.innerHTML += `
+                <div class="flex justify-between items-center gap-[10px]">
+                    <span>${currentEditItemAddList.item[i].quantity}</span>
+                    <span>${productname}</span>
+                    <button type="button" class="delListEditOrder" data-index=${i}>Supprimer</button>
+                </div>
+            `;
+
+        }
+
+        delLineFromEditItem();
+
+    });
+    
+    /*
+    document.querySelector('#listAddOrder').addEventListener('click', () => {
+
+        const list = document.querySelector('#tableListAddOrder');
+
+        let
+            productid = document.querySelector('#add-product-selector').value,
+            valuequantity = document.querySelector('#add-quantity-selector').value;
+            nopush = false;
+        
+        // Si on sélectionne "<-- Sélectionnez un produit -->", on n'ajoute rien à la liste
+        if (productid == -1 || valuequantity === "") return false;
+
+        // Boucle qui vérifie si l'id donné par le select est déjà présent dans la liste
+        for (let i=0; i < currentAddItemAddList.item.length; i++) {
+
+            // Si on a trouvé un cas similaire
+            if (productid === currentAddItemAddList.item[i].product_id) {
+                
+                // Si le cas est similaire et que la quantité est aussi identique, alors ne rien toucher dans la liste
+                if (currentAddItemAddList.item[i].quantity === valuequantity) return false;
+
+                // Si l'id est similaire mais que la quantité n'est pas identique, seulement modifier la quantité et ré-imprimmer la liste sans push un nouveau tableau
+                currentAddItemAddList.item[i].quantity = valuequantity;
+                nopush = true;
+                break;
+
+            };
+
+        }
+        
+        // Push un nouvel élément dans le tableau "item"
+        if (!nopush) currentAddItemAddList.item.push({product_id: productid, quantity: valuequantity});
+
+        // Réinitialiser la liste
+        list.innerHTML = "";
+
+        // Imprimmer la liste
+        for(let i = 0; i < currentAddItemAddList.item.length; i++) {
+
+            let productname = "";
+            
+            // Rechercher le nom du produit
+            for (let j=0; j < productjson.length; j++) {
+
+                if (currentAddItemAddList.item[i].product_id === productjson[j].id_produit) {
+
+                    productname = productjson[j].libelle;
+                    break;
+
+                }
+
+            }
+
+            list.innerHTML += `
+                <div class="flex justify-between items-center gap-[10px]">
+                    <span>${currentAddItemAddList.item[i].quantity}</span>
+                    <span>${productname}</span>
+                    <button type="button" class="delListAddOrder" data-index=${i}>Supprimer</button>
+                </div>
+            `;
+        }
+
+        delLineFromAddItem();
+        
+    });*/
+
+}
+
+function delLineFromEditItem() {
+
+    // Initiation des addEventListener sur les boutons de suppression des lignes
+    document.querySelectorAll('.delListEditOrder').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            
+            // Sélecteur pour la liste
+            const list = document.querySelector('#tableListEditOrder');
+            let index = btn.getAttribute('data-index');
+
+            if (currentEditItemAddList.item.length === 1) {
+
+                currentEditItemAddList.item = [];
+
+                list.innerHTML = `
+                <div class="flex-1 flex justify-center items-center gap-[10px]">
+                    <span>Pas de produit listé</span>
+                </div>
+                `;
+
+                return true;
+
+            }
+
+            currentEditItemAddList.item.splice(index, 1);
+
+            // Réinitialiser la liste
+            list.innerHTML = "";
+            
+            if (currentEditItemAddList.item.length > 0) {
+                
+                for(let i = 0; i < currentEditItemAddList.item.length; i++) {
+
+                    let productname = "";
+                    
+                    // Rechercher le nom du produit
+                    for (let j=0; j < productjson.length; j++) {
+        
+                        if (currentEditItemAddList.item[i].product_id === productjson[j].id_produit) {
+        
+                            productname = productjson[j].libelle;
+                            break;
+        
+                        }
+        
+                    }
+        
+                    list.innerHTML += `
+                        <div class="flex justify-between items-center gap-[10px]">
+                            <span>${currentEditItemAddList.item[i].quantity}</span>
+                            <span>${productname}</span>
+                            <button type="button" class="delListEditOrder" data-index=${i}>Supprimer</button>
+                        </div>
+                    `;
+                }
+
+            } else {
+
+                list.innerHTML = `
+                    <div class="flex-1 flex justify-center items-center gap-[10px]">
+                        <span>Pas de produit listé</span>
+                    </div>
+                `;
+
+            }
+            
+            delLineFromEditItem();
+
+        });
+
+    });
+
+}
+
+
+function delLineFromAddItem () {
+
+    // Initiation des addEventListener sur les boutons de suppression des lignes
+    document.querySelectorAll('.delListAddOrder').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            
+            // Sélecteur pour la liste
+            const list = document.querySelector('#tableListAddOrder');
+            let index = btn.getAttribute('data-index');
+
+            if (currentAddItemAddList.item.length === 1) {
+
+                currentAddItemAddList.item = [];
+
+                list.innerHTML = `
+                <div class="flex-1 flex justify-center items-center gap-[10px]">
+                    <span>Pas de produit listé</span>
+                </div>
+                `;
+
+                return true;
+
+            }
+
+            currentAddItemAddList.item.splice(index, 1);
+
+            // Réinitialiser la liste
+            list.innerHTML = "";
+            
+            if (currentAddItemAddList.item.length > 0) {
+                
+                for(let i = 0; i < currentAddItemAddList.item.length; i++) {
+
+                    let productname = "";
+                    
+                    // Rechercher le nom du produit
+                    for (let j=0; j < productjson.length; j++) {
+        
+                        if (currentAddItemAddList.item[i].product_id === productjson[j].id_produit) {
+        
+                            productname = productjson[j].libelle;
+                            break;
+        
+                        }
+        
+                    }
+        
+                    list.innerHTML += `
+                        <div class="flex justify-between items-center gap-[10px]">
+                            <span>${currentAddItemAddList.item[i].quantity}</span>
+                            <span>${productname}</span>
+                            <button type="button" class="delListAddOrder" data-index=${i}>Supprimer</button>
+                        </div>
+                    `;
+                }
+
+            } else {
+
+                list.innerHTML = `
+                    <div class="flex-1 flex justify-center items-center gap-[10px]">
+                        <span>Pas de produit listé</span>
+                    </div>
+                `;
+
+            }
+            
+            delLineFromAddItem();
+
+        });
+
+    });
+
+}
+
+function addItemsToDBEvent() {
+
+    document.querySelector('#formListEditOrder').addEventListener('click', () => {
+
+        console.log(`On tente d'envoyer les items`);
+
+        if (currentEditItemAddList.item.length < 0) {
+
+            console.log(`Pas de produits dans la liste, aucun ajout effectué`);
+            return false;
+
+        }
+
+        ResetRequest();
+        request.action = "ADD";
+        request.object = "ITEM";
+        request.content = {item: currentEditItemAddList.item};
+
+        let formdata = new FormData();
+        formdata.append('request', JSON.stringify(request));
+
+        fetch('app/', {method: 'POST', body: formdata})
+            .then(response => {
+
+                if (!response.ok) {
+
+                    // Si la requête n'a pas aboutie
+                    throw new Error(`Erreur lors de la requête vers l'api : ${response.status}`);
+
+                }
+
+                return response.json();
+                
+            })
+            .then(data => {
+
+                if (data.status !== "SUCCESS") {
+
+                    // Si l'API retourne une erreur
+                    throw new Error(`Erreur lors de l'ajout des produits dans la commande : ${data.message}`);
+
+                }
+
+                // Quand on arrive ici, c'est que la requête est effectuée.
+
+                orderjson[currentobject].items = null;
+                selectOrder();
+
+                currentEditItemAddList.item = [];
+
+                document.querySelector('#tableListEditOrder').innerHTML = `
+                <div class="flex-1 flex justify-center items-center gap-[10px]">
+                    <span>Pas de produit listé</span>
+                </div>
+                `;
+
+                console.log('Contenue de commande ajouté');
+                
+
+            })
+            .catch(error => console.error(`Erreur du fetch d'ajout de produit dans la commande : ${error}`));
+
+    });
+
+}
+
+function delItemsFromDBEvent() {
+
+    // Initiation des addEventListener sur les boutons de suppression des lignes
+    document.querySelectorAll('.delListOnglet').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            
+            // Sélecteur pour la liste
+            let id = btn.getAttribute('data-id');
+
+            ResetRequest();
+
+            request.action = "DELETE";
+            request.object = "ITEM";
+            request.content = {item: [{item_id: id}]};
+
+            let formdata = new FormData();
+            formdata.append('request', JSON.stringify(request));
+
+            fetch('app/', {method: "POST", body: formdata})
+                .then(response => {
+
+                    if (!response.ok) {
+
+                        // Si la requête n'a pas aboutie
+                        throw new Error(`Erreur lors de la requête vers l'api : ${response.status}`);
+    
+                    }
+
+                    return response.json();
+
+                })
+                .then(data => {
+
+                    if (data.status !== "SUCCESS") {
+
+                        // Si l'API retourne une erreur
+                        throw new Error(`Erreur lors de l'ajout des produits dans la commande : ${data.message}`);
+    
+                    }
+
+                    orderjson[currentobject].items = null;
+                    selectOrder();
+
+                    console.log(`Item supprimé.`);
+
+                })
+                .catch(error => console.error(`Erreur de fetch d'update : ${error}`));
+
+        })
+    });
+
+}
+
+function editOrderInformationsEvent() { // À MODIFIER
+
     document.querySelector('#formOngletSubmit').addEventListener('click', () => {
 
         ResetRequest();
@@ -186,14 +608,9 @@ function editOrderEvent() {
         request.action = "UPDATE";
         request.object = "ORDER";
         request.content = {
-            client_id: clientsjson[currentobject].id_client,
-            name: document.querySelector('#formOnglet1').value,
-            firstname: document.querySelector('#formOnglet2').value,
-            address: document.querySelector('#formOnglet3').value,
-            postal: document.querySelector('#formOnglet4').value,
-            compl_address: document.querySelector('#formOnglet5').value,
-            city: document.querySelector('#formOnglet6').value,
-            country: document.querySelector('#formOnglet7').value
+            order_id: orderjson[currentobject].id_commande,
+            client_id: document.querySelector('#client-selector').value,
+            address: document.querySelector('#adresse-selector').value
         };
 
         let formdata = new FormData();
@@ -218,23 +635,25 @@ function editOrderEvent() {
                 if (data.status !== "SUCCESS") {
 
                     // Si l'API retourne une erreur
-                    throw new Error(`Erreur lors de l'édition des informations du client : ${data.message}`);
+                    throw new Error(`Erreur lors de l'édition des informations de la commande : ${data.message}`);
 
                 }
 
                 // Quand on arrive ici, c'est que la requête est effectuée.
                 // Fermer le popup d'edition du client
 
-                console.log('Client modifié');
-                fetchAllClients(true, false);
+                console.log('Information de commande modifié');
+                fetchAllOrders(true, false);
 
             })
             .catch(error => console.error(`Erreur du fetch d'update : ${error}`));
 
     });
+
 }
 
 function deleteOrderEvent() {
+
     document.querySelector('#formOngletDelete').addEventListener('click', () => {
 
         ResetRequest();
@@ -242,7 +661,7 @@ function deleteOrderEvent() {
         request.action = "DELETE";
         request.object = "ORDER";
         request.content = {
-            client: [{client_id: clientsjson[currentobject].id_client}]
+            order_id: orderjson[currentobject].id_commande
         };
 
         let formdata = new FormData();
@@ -267,14 +686,14 @@ function deleteOrderEvent() {
                 if (data.status !== "SUCCESS") {
 
                     // Si l'API retourne une erreur
-                    throw new Error(`Erreur lors de l'effacement du client : ${data.message}`);
+                    throw new Error(`Erreur lors de l'effacement de la commande : ${data.message}`);
 
                 }
 
                 // Quand on arrive ici, c'est que la requête est effectuée.
 
-                console.log('Client supprimé');
-                fetchAllClients(true, false);
+                console.log('Commande supprimé');
+                fetchAllOrders(true, false);
 
                 // Reset page
 
@@ -303,10 +722,24 @@ function deleteOrderEvent() {
     });
 }
 
-function selectOrder () {
+function selectOrder() {
 
     document.querySelector('#adresse-selector').value = orderjson[currentobject].adresse_livraison;
     
+    const clientselector = document.querySelector('#client-selector');
+
+    clientselector.innerHTML = "";
+                
+    clientsjson.forEach(client => {
+
+        if(currentobject != null && orderjson[currentobject].from_client == client.id_client) {
+            clientselector.innerHTML += `<option value="${client.id_client}" selected>${client.nom} ${client.prenom}</option>`;
+        } else {
+            clientselector.innerHTML += `<option value="${client.id_client}">${client.nom} ${client.prenom}</option>`;
+        }
+
+    });
+
     // Affichage des commandes du client
     // Si il n'y a pas de commandes en cache
     if (orderjson[currentobject].items === null) {
@@ -316,8 +749,6 @@ function selectOrder () {
         request.action = "FETCH";
         request.object = "ITEM";
         request.content = {order_id: orderjson[currentobject].id_commande};
-
-        console.log(JSON.stringify(request));
 
         let formdata = new FormData();
         formdata.append('request', JSON.stringify(request));
@@ -375,7 +806,7 @@ function writeContentOrder() {
 
             list.innerHTML += `
 
-                <div class="mb-[5px] px-[20px] py-[5px] flex flex-row gap-[30px] hover:bg-slate-200 rounded-[20px] duration-300 last:mb-[0px] cursor-pointer">
+                <div class="mb-[5px] px-[20px] py-[5px] flex flex-row gap-[30px] hover:bg-slate-200 rounded-[20px] duration-300 last:mb-[0px]">
                     <div class="w-[20%] p-2 flex justify-center items-center">
                         <p class="font-bold">${i+1}</p>
                     </div>
@@ -386,7 +817,7 @@ function writeContentOrder() {
                         <p class="text-slate-600">${orderjson[currentobject].items[i].quantite}</p>
                     </div>
                     <div class="w-[20%] p-2 text-center">
-                        <button>Supprimer</button>
+                        <button class="delListOnglet" data-id="${orderjson[currentobject].items[i].id_contenue}">Supprimer</button>
                     </div>
                 </div>
 
@@ -400,19 +831,21 @@ function writeContentOrder() {
         list.innerHTML = `
 
             <div class="table-cell p-5">
-                <p class="font-bold text-center">Aucune commande n'a été réalisé par ce client</p>
+                <p class="font-bold text-center">Cette commande est vide.</p>
             </div>
 
         `;
 
     }
 
+    delItemsFromDBEvent();
+
 }
 
 function writeProductSelectFromCache() {
 
     const 
-    productselector = document.querySelector('#product-selector'),
+    productselector = document.querySelector('#edit-product-selector'),
     addproductselector = document.querySelector('#add-product-selector');
 
     productselector.innerHTML = "";
@@ -431,22 +864,7 @@ function writeProductSelectFromCache() {
 
 function writeClientSelectFromCache() {
 
-    const 
-        clientselector = document.querySelector('#client-selector'),
-        addclientselector = document.querySelector('#add-client-selector');
-
-    clientselector.innerHTML = "";
-    clientselector.innerHTML += `<option value="" disable><-- Selectionnez un client --></option>`;
-    
-    clientsjson.forEach(client => {
-
-        if(orderjson[currentobject].from_client == client.id_client) {
-            clientselector.innerHTML += `<option value="${client.id_client}" selected>${client.nom} ${client.prenom}</option>`;
-        } else {
-            clientselector.innerHTML += `<option value="${client.id_client}">${client.nom} ${client.prenom}</option>`;
-        }
-
-    });
+    const addclientselector = document.querySelector('#add-client-selector');
 
     addclientselector.innerHTML = "";
     addclientselector.innerHTML += `<option value="" disable><-- Selectionnez un client --></option>`;

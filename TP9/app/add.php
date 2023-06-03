@@ -13,7 +13,7 @@
 
     $client_required = ["name", "firstname", "address", "compl_address", "postal", "city", "country"];
     $product_required = ["product_code", "label", "price"];
-    $order_required = ["client", "address"];
+    $order_required = ["client_id", "address"];
     $item_required = ["order_id", "product_id", "quantity"];
 
     // Identification de l'objet de la requête
@@ -113,7 +113,7 @@
 
             }
 
-            $result = addOrderToDB($pdo, $request['content']['client'], $request['content']['address']);
+            $result = addOrderToDB($pdo, $request['content']['client_id'], $request['content']['address']);
 
             if (!is_bool($result)) {
 

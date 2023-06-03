@@ -43,14 +43,14 @@ function fetchAllProducts(write, writeOrderSelect) {
             if (writeOrderSelect) {
 
                 const 
-                    productselector = document.querySelector('#product-selector'),
+                    productselector = document.querySelector('#edit-product-selector'),
                     addproductselector = document.querySelector('#add-product-selector');
                 
                 productselector.innerHTML = "";
-                productselector.innerHTML += `<option value="" disable><-- Selectionnez un produit --></option>`;
+                productselector.innerHTML += `<option value="-1" disable><-- Selectionnez un produit --></option>`;
 
                 addproductselector.innerHTML = "";
-                addproductselector.innerHTML += `<option value="" disable><-- Selectionnez un produit --></option>`;
+                addproductselector.innerHTML += `<option value="-1" disable><-- Selectionnez un produit --></option>`;
 
                 // Écrire la liste des produits dans le select
                 productjson.forEach(product => {
